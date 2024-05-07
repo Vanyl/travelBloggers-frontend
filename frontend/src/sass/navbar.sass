@@ -1,6 +1,7 @@
 body, html
   margin: 0
   padding: 0
+  width: 100%
 
 
 .navbar
@@ -16,7 +17,9 @@ body, html
 .navbar-logo
   font-size: 24px
   font-weight: bold
-  margin: 0  
+  margin: 0
+  color: white
+  text-decoration: none  
 
 .navbar-links
   display: flex
@@ -24,16 +27,18 @@ body, html
   margin: 0  
 
   .link
-    font-size: 24px
-    color: #007bff
+    font-size: 18px
+    color: white
     cursor: pointer
     margin: 0 50px 0 0  // Annule la marge supérieure et inférieure, espace à droite
     text-decoration: none  // Supprime le soulignement par défaut
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
     &:hover
       text-decoration: underline
 
     &[aria-disabled="true"]
-      color: grey
+      color: white
       cursor: not-allowed
       &:hover
         text-decoration: none
+
