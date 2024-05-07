@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import React from "react";
+import Navbar from "./components/Navbar"
 import './App.css'
-import './components/Authentication'
+
 
 function App() {
 
   return (
     <>
-
+    <Navbar/>
     </>
   )
 }

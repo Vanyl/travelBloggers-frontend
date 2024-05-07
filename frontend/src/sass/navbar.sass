@@ -1,0 +1,39 @@
+body, html
+  margin: 0
+  padding: 0
+
+
+.navbar
+  font-family: 'Roboto', sans-serif //Font a modifier ??
+  width: 100%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 15px 50px
+  background-color: transparent
+  box-sizing: border-box
+
+.navbar-logo
+  font-size: 24px
+  font-weight: bold
+  margin: 0  
+
+.navbar-links
+  display: flex
+  align-items: center
+  margin: 0  
+
+  .link
+    font-size: 24px
+    color: #007bff
+    cursor: pointer
+    margin: 0 50px 0 0  // Annule la marge supérieure et inférieure, espace à droite
+    text-decoration: none  // Supprime le soulignement par défaut
+    &:hover
+      text-decoration: underline
+
+    &[aria-disabled="true"]
+      color: grey
+      cursor: not-allowed
+      &:hover
+        text-decoration: none
