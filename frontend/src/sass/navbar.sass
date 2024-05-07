@@ -30,15 +30,21 @@ body, html
     font-size: 18px
     color: white
     cursor: pointer
-    margin: 0 50px 0 0  // Annule la marge supérieure et inférieure, espace à droite
-    text-decoration: none  // Supprime le soulignement par défaut
+    margin: 0 50px 0 0
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
+    background-image: linear-gradient(to bottom, transparent 65%, #39db9a 0)
+    background-size: 0% 100%
+    background-repeat: no-repeat
+    text-decoration: none
+    transition: background-size .4s ease
     &:hover
-      text-decoration: underline
+      background-size: 100% 100%
+      cursor: pointer
 
     &[aria-disabled="true"]
       color: white
       cursor: not-allowed
       &:hover
         text-decoration: none
+
 
