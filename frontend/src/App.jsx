@@ -1,14 +1,15 @@
 import React from "react";
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
 import './App.css'
+import './sass/style.sass'
+import AppRouter from "./router/AppRouter";
+
 
 
 function App() {
 
   return (
     <>
-    <Hero/>
+      <AppRouter/>
     </>
   )
 }
