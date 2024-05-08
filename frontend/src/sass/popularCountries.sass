@@ -1,0 +1,84 @@
+.popular-countries
+  text-align: center
+  padding: 20px
+  background-color: #e4e9ec
+  font-family: 'Roboto', sans-serif
+
+h2
+  color: #1E2146
+  margin-bottom: 15px
+  font-size: 2.2em  
+  font-weight: 600  
+
+h4
+  color: #39db9a
+  font-size: 1em  
+  margin-top: 15
+
+h5
+  color: #7f8c8d  
+  font-size: 1.5em  // Taille normale pour la lecture facile
+  margin-top: 0
+  margin-bottom: 10px  // Espacement avant de commencer le contenu suivant
+  font-weight: normal
+  line-height: 1.6  // Augmente la hauteur de ligne pour une meilleure lisibilité
+  max-width: 60%  // Contrôle la largeur pour une meilleure présentation du texte
+  margin-left: auto  // Centrage du texte descriptif
+  margin-right: auto
+
+.countries-grid
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 100%
+  flex-wrap: wrap
+
+.country
+  width: 200px
+  margin: 25px
+  transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1), background-color 0.5s ease
+
+.polaroid
+  background: white
+  padding: 10px
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2)
+  text-align: center
+  position: relative
+  overflow: hidden
+  border-radius: 2px  // Coins légèrement arrondis pour un look doux
+  &:hover
+    transform: translateY(-20px)
+    &:after
+      content: ""
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background-color: rgba(57, 219, 154, 0.2)
+      opacity: 0
+      transition: opacity 0.5s ease
+      opacity: 1
+
+.photo
+  width: 100%
+  height: 180px
+  background-color: #1E2146
+  display: flex
+  align-items: center
+  justify-content: center
+  color: white
+  font-size: 20px
+
+.caption
+  color: #33C58B
+  font-weight: bold
+  margin-top: 15px
+
+.discover
+  display: block
+  color: #39db9a
+  text-decoration: none
+  font-weight: bold
+  margin-top: 5px
+  margin-bottom: 15px
