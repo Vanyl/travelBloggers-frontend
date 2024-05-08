@@ -1,5 +1,7 @@
 import React from "react";
-import Navbar from "./components/Navbar"
+import SubFooter from "./components/SubFooter"
+import Footer from "./components/Footer"
+import PopularCountries from "./components/PopularCountries"
 import './App.css'
 
 
@@ -8,7 +10,10 @@ function App() {
 
   return (
     <>
-    <Navbar/>
+    <PopularCountries/>
+    <SubFooter/>
+    <Footer/>
+
     </>
   )
 }
