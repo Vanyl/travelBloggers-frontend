@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
-import Footer from "./components/Footer"
-import SubFooter from "./components/SubFooter"
 import './App.css'
+import './sass/style.sass'
+import AppRouter from "./router/AppRouter";
 
 
 
@@ -11,9 +9,7 @@ function App() {
 
   return (
     <>
-    <Hero/>
-    <SubFooter/>
-    <Footer/>
+      <AppRouter/>
     </>
   )
 }

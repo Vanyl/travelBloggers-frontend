@@ -1,12 +1,10 @@
 import React from 'react';
-import Navbar from './Navbar'; 
 import { FaSearch } from "react-icons/fa";
 import '../sass/hero.sass';
 
 function Hero() {
   return (
     <div className="hero">
-      <Navbar />
       <h1 className="hero-title">Ready to Travel?</h1>
       <div className="search-bar">
         <input type="text" placeholder="Your next destination..." />
