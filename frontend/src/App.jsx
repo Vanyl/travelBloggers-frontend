@@ -1,8 +1,7 @@
 import React from "react";
-import SubFooter from "./components/SubFooter"
-import Footer from "./components/Footer"
-import PopularCountries from "./components/PopularCountries"
 import './App.css'
+import './sass/style.sass'
+import AppRouter from "./router/AppRouter";
 
 
 
@@ -10,10 +9,7 @@ function App() {
 
   return (
     <>
-    <PopularCountries/>
-    <SubFooter/>
-    <Footer/>
-
+      <AppRouter/>
     </>
   )
 }
