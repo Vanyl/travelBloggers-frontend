@@ -1,24 +1,80 @@
 .subfooter
   background-image: url('/src/assets/images/surfooter-banner.jpg')
+  font-family: 'Roboto', sans-serif
   background-size: cover
   background-position: center top
-  height: 100vh
+  height: 70vh
   display: flex
-  justify-content: center
+  flex-direction: column
+  justify-content: space-between
   align-items: center
+  padding: 20px 50px
+  color: #1E2146
 
 .travel-quote
-  font-family: 'Roboto', sans-serif
   font-size: 25px
-  color: #1E1E1E
-  width: 70%
+  color: #1E2146
   text-align: center
-  margin: 0
-  padding: 20px
-  
-.quote-author 
-   font-size:18px
-   margin-top: 8px
-   font-style: italic  
-   text-align: center
+  width: 70%
+  margin: auto 0  // Centrage vertical
 
+.quote-author
+  font-size: 18px
+  font-style: italic
+  text-align: center
+  margin-top: 8px
+
+.sub-footer-footer-content
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+
+.subfooter-blog-title
+  color: green
+  font-size: 20px
+  margin: 0  // Assure qu'il n'y a pas de marge qui pousse les éléments inutilement
+
+.sub-link-container
+  display: flex
+  justify-content: center
+  gap: 30px
+  flex-grow: 1  // Permet au conteneur de liens de prendre tout l'espace disponible
+
+h4.link
+  font-size: 18px
+  margin: 0
+
+.sub-social-links
+  display: flex
+  justify-content: flex-end
+  gap: 10px
+
+.sub-social-links a
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  background-color: #1E2146
+  border-radius: 50%
+  width: 40px
+  height: 40px
+  color: white
+  svg
+    width: 20px
+    height: 20px
+
+.sub-legal
+  color: #1E2146
+  display: flex
+  justify-content: center
+  width: 100%
+  margin-top: 25px
+
+.sub-legal p, .sub-legal-link
+  color: #1E2146
+  font-size: 12px
+  text-decoration: none
+  margin: 0 5px
+
+.sub-legal-link:hover
+  text-decoration: underline
