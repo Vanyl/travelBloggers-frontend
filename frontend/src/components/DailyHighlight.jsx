@@ -29,4 +29,5 @@ function DailyHighlight() {
     );
 }
 
+
 export default DailyHighlight;
