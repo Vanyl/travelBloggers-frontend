@@ -7,7 +7,7 @@ function SubFooter() {
     <div className="subfooter">
         <blockquote className="travel-quote">
             "The most beautiful thing in the world is, of course, the world itself."
-            <div className="quote-author">– Wallace Stevens</div>
+            <div className="quote-author">Wallace Stevens</div>
         </blockquote>
         <div className="sub-footer-footer-content">
             <h3 className="subfooter-blog-title">Travel Bloggers</h3>

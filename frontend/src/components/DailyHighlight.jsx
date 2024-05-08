@@ -10,12 +10,12 @@ function DailyHighlight() {
 
     return (
         <div className="daily-highlight">
-            <h2>Daily Discovery</h2>
-            <h3>Destination Of The Day</h3>
-            <p>Experience a new destination every day and uncover the best activities, sights, and secrets that await.</p>
+            <h3>Daily Discovery</h3>
+            <h2>Destination Of The Day</h2>
+            <h5>Experience a new destination every day and uncover the best activities, sights, and secrets that await.</h5 >
             <div className="content">
                 <div className="polaroid">
-                    <div className="photo" style={{ backgroundColor: country.imageUrl ? `url(${country.imageUrl})` : '#B4E1FA' }}>
+                    <div className="photo" style={{ backgroundColor: country.imageUrl ? `url(${country.imageUrl})` : '#1E2146' }}>
                         {/* Future placement for the image */}
                     </div>
                 </div>
