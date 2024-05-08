@@ -6,7 +6,7 @@ function Footer() {
   return (
     <div className="footer">
       <div className="footer-content">
-        <h3>Travel Bloggers</h3>
+        <h3 className="footer-blog-title">Travel Bloggers</h3>
         <div className="link-container">
           <h4 className="link">About</h4>
           <h4 className="link">Contact</h4>

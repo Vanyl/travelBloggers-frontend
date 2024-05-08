@@ -10,7 +10,7 @@ function SubFooter() {
             <div className="quote-author">– Wallace Stevens</div>
         </blockquote>
         <div className="sub-footer-footer-content">
-            <h3 >Travel Bloggers</h3>
+            <h3 className="subfooter-blog-title">Travel Bloggers</h3>
             <div className="sub-link-container">
               <h4 className="link">About</h4>
               <h4 className="link">Contact</h4>
