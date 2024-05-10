@@ -1,15 +1,16 @@
 import Hero from '../components/Hero'
-import PopularCountries from '../components/PopularCountries'
-import DailyHighlight from '../components/DailyHighlight'
-import SubFooter from '../components/SubFooter'
-import Footer from '../components/Footer'
 import Continents from '../components/Continents';
+import Posts from '../components/Posts';
+import DailyHighlight from '../components/DailyHighlight'
+import PopularCountries from '../components/PopularCountries'
+import SubFooter from '../components/SubFooter'
 
 const Home = () => {
     return (
         <>
             <Hero/>
-            <Continents/>  
+            <Continents/>
+            <Posts/>
             <DailyHighlight/>
             <PopularCountries/>
             <SubFooter/>
