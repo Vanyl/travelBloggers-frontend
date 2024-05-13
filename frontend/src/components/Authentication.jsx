@@ -1,43 +1,111 @@
-import '../sass/authentication.sass'
-import { useState } from 'react'
+import '../sass/authentication.sass';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Authentication = () => {
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+    const [error, setError] = useState(null);
     const [isSignUp, setIsSignUp] = useState(false);
+    const [notification, setNotification] = useState(null);
 
     const toggleLogin = () => {
         setIsSignUp(!isSignUp);
+    };
+
+    const onSubmitLogin = async (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+        const formData = new FormData(event.target); 
+        const data = Object.fromEntries(formData.entries()); 
+
+        try {
+            const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/login', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                const accessToken = await response.json();
+                const token = accessToken.token;
+                localStorage.setItem('accessToken', token);
+                console.log(accessToken.message)
+                navigate("/");
+            } else {
+                const { error } = await response.json();
+                setError(error);
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+            setError('An unexpected error occurred. Please try again later.');
+        }
+    };
+
+
+    const onSubmitRegister = async (event)  => {
+        event.preventDefault(); // Prevent default form submission behavior
+        const formData = new FormData(event.target); 
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch(`https://travel-blogger-46c930280c07.herokuapp.com/api/register`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(data);
+            console.log(response);
+            if (response.ok) {
+                const  newUser  = await response.json();
+                console.log(newUser);
+                setNotification({ type: 'success', message: 'You have been successfully registered ! You can log in now with your email.' });
+                navigate("/");
+            } else {
+                const { error } = await response.json();
+                setNotification({ type: 'error', message: `Registration failed: ${error}` });
+            }
+        } catch (error) {
+            console.error('Error while posting a message :', error);
+            setNotification({ type: 'error', message: 'An error occurred. Please try again later.' });
+        }
     }
 
     const AuthenticationForm = () => {
         if (isSignUp) {
             return (
-                <form className="register-form">
-                    <input type="text" name="email" placeholder="Email" />
-                    <input type="text" name="username" placeholder="Username" />
-                    <input type="password" name="password" placeholder="Password" />
-                    <button>create</button>
+                <form className="register-form" onSubmit={onSubmitRegister}>
+                    <input type="text" name="email" placeholder="Email" required/>
+                    <input type="text" name="name" placeholder="Username" required/>
+                    <input type="password" name="password" placeholder="Password" required/>
+                    <button type='submit'>create</button>
                     <p className="message">Already registered? <a onClick={toggleLogin} href="#">Sign In</a></p>
-                </form>)
+                </form>
+            );
         } else {
             return (
-                <form className="login-form">
-                    <input type="text" name="email" placeholder="Email" />
-                    <input type="password" name="password" placeholder="Password" />
-                    <button>login</button>
+                <form className="login-form" onSubmit={onSubmitLogin}>
+                    <input type="text" name="email" placeholder="Email" required/>
+                    <input type="password" name="password" placeholder="Password" required/>
+                    <button type='submit'>login</button>
                     <p className="message">Not registered? <a onClick={toggleLogin} href="#">Create an account</a></p>
-                </form>)
+                </form>
+            );
         }
-    }
+    };
 
     return (
-        <div className="login-page ">
-            <div className="form authentication-container">
-                <AuthenticationForm />
+        <div className='overlay'>
+            <div className="login-page">
+                <div className="form authentication-container">
+                    <AuthenticationForm />
+                    {error && <p>{error}</p>}
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Authentication
+export default Authentication;
