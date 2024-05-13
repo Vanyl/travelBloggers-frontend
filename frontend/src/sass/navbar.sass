@@ -1,11 +1,5 @@
-body, html
-  margin: 0
-  padding: 0
-  width: 100%
-
-
 .navbar
-  font-family: 'Roboto', sans-serif //Font a modifier ??
+  font-family: 'Roboto', sans-serif
   width: 100%
   display: flex
   justify-content: space-between
@@ -14,37 +8,60 @@ body, html
   background-color: transparent
   box-sizing: border-box
 
-.navbar-logo
-  font-size: 24px
-  font-weight: bold
-  margin: 0  
-  color: white
-  text-decoration: none  
-
-.navbar-links
-  display: flex
-  align-items: center
-  margin: 0  
-
-  .link
-    font-size: 18px
+  .navbar-logo
+    font-size: 24px
+    font-weight: bold
+    margin: 0  
     color: white
-    cursor: pointer
-    margin: 0 50px 0 0
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
-    background-image: linear-gradient(to bottom, transparent 65%, #39db9a 0)
-    background-size: 0% 100%
-    background-repeat: no-repeat
-    text-decoration: none
-    transition: background-size .4s ease
-    &:hover
-      background-size: 100% 100%
-      cursor: pointer
+    text-decoration: none  
 
-    &[aria-disabled="true"]
+  .navbar-links
+    display: flex
+    align-items: center
+    margin: 0  
+
+    .link
+      font-size: 18px
       color: white
-      cursor: not-allowed
+      cursor: pointer
+      margin-right: 50px
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
+      background-image: linear-gradient(to bottom, transparent 65%, #39db9a 0)
+      background-size: 0% 100%
+      background-repeat: no-repeat
+      text-decoration: none
+      transition: background-size .4s ease
+
       &:hover
-        text-decoration: none
+        background-size: 100% 100%
+        cursor: pointer
 
+      &[aria-disabled="true"]
+        color: white
+        cursor: not-allowed
 
+        &:hover
+          text-decoration: none
+
+  .right-links
+    display: flex
+    align-items: center
+
+    .link
+      font-size: 18px
+      color: white
+      cursor: pointer
+      margin-right: 50px
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
+      background-image: linear-gradient(to bottom, transparent 65%, #39db9a 0)
+      background-size: 0% 100%
+      background-repeat: no-repeat
+      text-decoration: none
+      transition: background-size .4s ease
+
+      &:hover
+        background-size: 100% 100%
+        cursor: pointer
+
+  .search-icon
+    margin-left: auto // Cela alignera l'icône de recherche à droite
