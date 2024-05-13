@@ -1,0 +1,139 @@
+.profile-container 
+    max-width: 800px
+    margin: 20px auto
+    padding: 20px
+    background-color: #e4e9ec
+    border-radius: 0  // Supprime les bords arrondis
+
+    .profile-info 
+        display: flex
+        align-items: center
+        position: relative // Position relative pour placer le bouton de réglages par rapport à ce conteneur
+
+        .profile-picture 
+            width: 100px
+            height: 100px
+            border-radius: 50%
+            overflow: hidden
+            margin-right: 20px
+
+            img 
+                width: 100%
+                height: 100%
+                object-fit: cover
+
+        .profile-details 
+            flex: 1
+            margin-left: 50px
+
+        .settings-button
+            cursor: pointer
+            display: inline-flex
+            align-items: center
+            justify-content: center
+            background-color: transparent
+            border: none
+            color: #1E2146
+            font-size: 32px
+            transition: color 0.3s ease
+            align-self: flex-start // Alignement au début du conteneur flex
+            position: absolute 
+            top: 10px 
+            right: 10px 
+
+            &:hover
+                color: #39db9a
+                animation: rotateCog 3.8s infinite
+
+    @keyframes rotateCog 
+        0% 
+            transform: rotate(0deg)
+        
+        100% 
+            transform: rotate(360deg)
+        
+    
+
+
+
+    .feed-header 
+        margin-top: 20px
+        text-align: center
+        
+        button 
+            flex: 1 // Utilise toute la largeur disponible
+            padding: 10px 20px
+            margin: 0 5px 10px 5px  // Ajuste les marges pour rapprocher les boutons
+            border: none
+            cursor: pointer
+            color: #1E2146 
+            font-weight: bold
+            background-color: transparent 
+            transition: color 0.3s ease 
+
+            &:first-child 
+                margin-left: 0 // Ajuste la marge gauche pour le premier bouton
+                border-right: 1px solid #ccc // Ajoute une bordure à droite du premier bouton
+
+            &.active 
+                color: #39db9a
+                border-bottom: 2px solid #39db9a // Ajoute une bordure inférieure au bouton actif
+                padding-bottom: 8px // Ajuste l'espacement sous le bouton actif pour que la bordure inférieure soit visible
+
+            &:hover
+                color: #39db9a 
+
+.feed-grid 
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+    grid-auto-rows: 200px
+    grid-gap: 20px
+    margin-top: 20px
+
+    .feed-item 
+        display: flex // Utilise flexbox pour aligner le contenu dans la direction verticale
+        flex-direction: column // Place le contenu de chaque article en colonne
+        justify-content: space-between // Aligne le contenu verticalement avec de l'espace entre eux
+        border: 1px solid #ccc
+        border-radius: 5px
+        padding: 10px
+
+        img 
+            width: 100%
+            height: auto
+            border-radius: 5px
+
+.info-container 
+    display: flex
+    align-items: center
+    margin-top: 10px
+    gap: 25px
+
+.tag 
+    background-color: grey
+    border-radius: 8px
+    margin-top: 10px
+    padding: 0 5px
+
+
+
+.add-article-button 
+    position: fixed
+    bottom: 50px
+    right: 250px
+    background-color: #39db9a
+    color: white
+    width: 60px
+    height: 60px
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 24px
+    cursor: pointer
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
+
+
+.add-article-button:hover 
+    background-color: #2ec58b
+
