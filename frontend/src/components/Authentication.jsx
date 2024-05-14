@@ -2,7 +2,7 @@ import '../sass/authentication.sass';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Authentication = () => {
+const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isSignUp, setIsSignUp] = useState(false);
@@ -31,6 +31,7 @@ const Authentication = () => {
                 const token = accessToken.token;
                 localStorage.setItem('accessToken', token);
                 console.log(accessToken.message)
+                setIsLoggedIn(true); // Mise à jour de l'état de connexion
                 navigate("/");
             } else {
                 const { error } = await response.json();
