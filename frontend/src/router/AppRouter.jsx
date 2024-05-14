@@ -7,6 +7,10 @@ import Authentication from "../components/Authentication"
 import NoPage from "../pages/NoPage";
 import Contact from "../pages/Contact"
 import Article from "../pages/Article";
+import Profile from "../components/Profile"
+import ProfileSettings from "../components/ProfileSettings"
+import AddArticle from "../components/AddArticle";
+
 
 
 function AppRouter() {
@@ -21,6 +25,9 @@ function AppRouter() {
           <Route path="about" element = {<About/>} />
           <Route path="contact" element = {<Contact/>} />
           <Route path="article" element = {<Article />} />
+          <Route path="my-account" element = {<Profile />} />
+          <Route path="my-account-settings" element = {<ProfileSettings />} />
+          <Route path="my-account-add-article" element = {<AddArticle />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>

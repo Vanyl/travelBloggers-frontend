@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../sass/profile.sass'; 
 import { FaCog, FaPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -11,7 +12,7 @@ const Profile = () => {
     };
 
     const handleSettingsButtonClick = () => {
-        // Logique à exécuter lorsque le bouton de réglages est cliqué
+
     };
 
     const handleAddArticle = () => {
@@ -30,7 +31,7 @@ const Profile = () => {
                     <p>Description</p>
                 </div>
                 <div className="settings-button" onClick={handleSettingsButtonClick}>
-                    <FaCog />
+                    <Link to="/my-account-settings"><FaCog /></Link>
                 </div>
             </div>
             <div className="feed-header">
@@ -139,7 +140,7 @@ const Profile = () => {
                     </div>
             </div>
             <div className="add-article-button" onClick={handleAddArticle}>
-                <FaPlus />
+                <Link to="/my-account-add-article"><FaPlus /></Link>
             </div>
         </div>
 
