@@ -52,7 +52,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       <Link to="/" className="navbar-logo">Travel Bloggers</Link>   
       <div className="navbar-links">
         <Link to="/about" className="link">About</Link>
-        <Link to="#" className="link">Contact</Link>
+        <Link to="/contact" className="link">Contact</Link>
         <div className="right-links">
           {isLoggedIn ? (
             <>

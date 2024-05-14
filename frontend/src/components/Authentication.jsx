@@ -81,7 +81,7 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
                     <input type="text" name="email" placeholder="Email" required/>
                     <input type="text" name="name" placeholder="Username" required/>
                     <input type="password" name="password" placeholder="Password" required/>
-                    <button type='submit'>create</button>
+                    <button type='submit'>register</button>
                     <p className="message">Already registered? <a onClick={toggleLogin} href="#">Sign In</a></p>
                 </form>
             );
@@ -100,7 +100,7 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
     return (
         <div className='overlay'>
             <div className="login-page">
-                <div className="form authentication-container">
+                <div className="form-authentication authentication-container">
                     <AuthenticationForm />
                     {error && <p>{error}</p>}
                 </div>

@@ -1,0 +1,96 @@
+.contact-hero
+  height: 80vh
+  background-image: url('/src/assets/images/authentication4.jpg')
+  background-size: cover
+  background-position: center
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  text-align: center
+  color: white
+
+.contact-container
+  width: 360px
+  padding: 4% 0 0
+  margin: auto
+
+h2
+  text-align: center
+  color: white
+
+.contact-form-title 
+  overflow: hidden
+  text-align: center
+  color: #1E2146
+
+  &::before,
+  &::after 
+    content: ''
+    height: 0.9px
+    position: relative
+    display: inline-block
+    vertical-align: middle
+    width: 40%
+  
+  &::before 
+    right: 0.5em
+    margin-left: -50%
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent)
+  
+  &::after 
+    left: 0.5em
+    margin-right: -50%
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent)
+    
+.contact-form
+  //position: relative
+  z-index: 2 
+  background: #FFFFFF
+  max-width: 360px
+  margin: 50px auto 100px
+  padding: 45px
+  text-align: center
+  border: 1px solid  #39db9a
+
+.contact-form input
+  font-family: "Roboto", sans-serif
+  outline: 0
+  background: #f2f2f2
+  width: 100%
+  border: 0
+  margin: 0 0 15px
+  padding: 15px
+  box-sizing: border-box
+  font-size: 14px
+
+.contact-form button
+  font-family: "Roboto", sans-serif
+  text-transform: uppercase
+  outline: 0
+  background: transparent
+  width: 100%
+  border: 1px solid  #39db9a
+  border-radius: 5px
+  padding: 15px
+  color: grey
+  font-size: 14px
+  transition: background-color 0.3s ease, color 0.3s ease
+  cursor: pointer
+
+.contact-form button:hover, .form button:active, .form button:focus
+  background: #39db9a
+  color: white
+
+.contact-form textarea
+  width: 95%
+  height: 100px
+  min-height: 100px
+  min-width: 95%
+  max-width: 95%
+  margin-bottom: 15px
+  
+  &:focus
+    outline-color: #39db9a
+
+    
