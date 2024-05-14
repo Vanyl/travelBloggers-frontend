@@ -1,10 +1,36 @@
 import React from 'react';
 import { FaSearch } from "react-icons/fa";
 import '../sass/navbar.sass';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Navbar({ isLoggedIn }) {
-  
+function Navbar({ isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/logout', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}` 
+        }
+      });
+
+      if (response.ok) {
+        // remove token from local storage
+        localStorage.removeItem('accessToken');
+        console.log("log out ok")
+        setIsLoggedIn(false);
+        // Redirect to the home page
+        navigate('/');
+      } else {
+      
+        console.error('Error logging out:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo">Travel Bloggers</Link>   
@@ -15,7 +41,7 @@ function Navbar({ isLoggedIn }) {
           {isLoggedIn ? (
             <>
               <Link to="/my-account" className="link">My Account</Link>
-              <Link to="/logout" className="link">Logout</Link>
+              <button className="logout-button" onClick={handleLogout}>Logout</button>
             </>
           ) : (
             <>

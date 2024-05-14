@@ -13,7 +13,12 @@
     font-weight: bold
     margin: 0  
     color: white
-    text-decoration: none  
+    text-decoration: none
+    transition: color .4s ease
+    
+    &:hover
+      color: #39db9a
+
 
   .navbar-links
     display: flex
@@ -63,5 +68,25 @@
         background-size: 100% 100%
         cursor: pointer
 
-  .search-icon
-    margin-left: auto // Cela alignera l'icône de recherche à droite
+    .logout-button
+      font-size: 18px
+      color: white
+      cursor: pointer
+      margin-right: 50px
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
+      background-color: transparent // Rend le fond transparent
+      border: none
+      background-size: 0% 100%
+      background-repeat: no-repeat
+      text-decoration: none
+      transition: background-size .4s ease
+
+      &:hover
+        background-size: calc(100% - 11px) 100%
+        cursor: pointer
+        // Utilisation de la couleur de fond pour l'effet de soulignement
+        background-image: linear-gradient(to bottom, transparent 65%, #39db9a 0)
+        background-position: 5px 100%
+
+        
+
