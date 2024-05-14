@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import heroBanner2 from '../assets/images/hero-banner2.jpg';
 import '../sass/posts.sass';
+import { Link } from 'react-router-dom';
 
 const Posts = () => {
     const [isHovered, setIsHovered] = useState(false);
@@ -30,7 +31,7 @@ const Posts = () => {
                         </div>
                         {isHovered && (
                             <div className='hover-info'>
-                                <p className='title'>{post.title}</p>
+                                <Link to="/article"><p className='title'>{post.title}</p></Link>   
                                 <p className='date'>{post.date}</p>
                             </div>
                         )}

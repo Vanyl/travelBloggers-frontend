@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaSearch } from "react-icons/fa";
 import '../sass/navbar.sass';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
@@ -31,9 +32,23 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
     }
   };
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <Link to="/" className="navbar-logo">Travel Bloggers</Link>   
       <div className="navbar-links">
         <Link to="/about" className="link">About</Link>
