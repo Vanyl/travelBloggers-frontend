@@ -31,6 +31,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
     }
   };
 
+
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo">Travel Bloggers</Link>   
@@ -46,7 +47,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
           ) : (
             <>
               <Link to="/authentication" className="link" onClick={() => console.log('Login Soon')}>Login</Link>
-              <Link to="/authentication" className="link" onClick={() => console.log('Sign Up Soon')}>Sign Up</Link>
+              {/* <Link to="/authentication" className="link" onClick={() => console.log('Sign Up Soon')}>Sign Up</Link> */}
             </>
           )}
           <FaSearch className="link search-icon" />
