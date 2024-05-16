@@ -1,26 +1,36 @@
 import '../sass/addArticle.sass'
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
+import { useForm } from "react-hook-form"
 
 const AddArticle = () => {
-    const [tags, setTags] = useState([]);
-    const [selectedActivities, setSelectedActivities] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState('');
-    const [countryOptions, setCountryOptions] = useState([]);
-    const [activityOptions, setActivityOptions] = useState([
-        { value: 'tips', label: 'tips' },
-        { value: 'family', label: 'family' },
-        { value: 'sport', label: 'sport' },
-        { value: 'culture', label: 'culture' },
-    ]);
-    // enctype= multipart/form-data //pour les images
+    // const [tags, setTags] = useState([]);
+    // const [selectedCategories, setSelectedCategories] = useState([]);
+    // const [selectedCountry, setSelectedCountry] = useState(null);
+    // const [selectedFile, setSelectedFile] = useState(null);
 
-    const activityTags = [
-        { id: 1, name: 'tips', value: 'tips', label: 'tips' },
-        { id: 2, name: 'family', value: 'family', label: 'family' },
-        { id: 3, name: 'sport', value: 'sport', label: 'sport' },
-        { id: 4, name: 'culture', value: 'culture', label: 'culture'},
-    ]
+    const [countryOptions, setCountryOptions] = useState([]);
+    const [categoryOptions, setCategoryOptions] = useState([]);
+    const [notification, setNotification] = useState(null);
+    const [selectedFileName, setSelectedFileName] = useState('');
+
+    const { register, handleSubmit, setValue, getValues, formState: { errors } } = useForm();
+
+    //retrieve categories
+    useEffect(() => {
+        fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/all-categories')
+        .then(response => response.json())
+        .then(data => {
+            const categoryOptions = data.categories.map(category => ({
+                value: category.id,
+                label: category.name
+            }));
+            setCategoryOptions(categoryOptions);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+    }, []);
     
     useEffect(() => {
         fetch('https://restcountries.com/v3.1/all')
@@ -38,111 +48,119 @@ const AddArticle = () => {
             });
     }, []);
 
-    // const handleSearch = (event) => {
-    //     const countryName = event.target.value;
-    //     setSearchInput(countryName)
-    //     if (countryName.length > 0) {
-    //         fetch(`https://restcountries.com/v3.1/name/${countryName}`)
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 setSearchResults(data.map(country => country.name.common));
-    //             })
-    //             .catch(error => {
-    //                 console.error('There has been a problem with your fetch operation:', error);
-    //             });
-    //     } else {
-    //         setSearchResults([]);
-    //     }
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setValue('main_picture', file);
+            setSelectedFileName(file.name); // Update the state with the file name
+        }
+    };
+
+
+    // const handleFileSelect = (event) => {
+    //     setSelectedFile(event.target.files[0]);
     // };
 
-    const handleCategoryChange = (selected) => {
-        setSelectedActivities(selected);
-        if (selected && !tags.includes(selected.value)) {
-            setTags([...tags, selected.value]);
-        }
-    };
-
-    //handle selection from country dropdown
-    const handleCountrySelect = (selected) => {
-        setSelectedCountry(selected);
-        if (!tags.includes(selected.value)) {
-            setTags([...tags, selected.value, selected.continent]);
-        }
-    };
-
-    //sending to db
-    const submitArticle = async (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const data = Object.fromEntries(formData.entries());
-        console.log(event)
-        console.log(data)
-
-            // Add tags to the form data
-        tags.forEach((tag, index) => {
-            formData.append(`tags[${index}]`, tag);
+    // //sending to db
+    const submitArticle = async (data) => {
+        console.log(data);
+        // data.preventDefault();
+        const formData = new FormData(data.target);
+        formData.append('title', getValues('title'));
+        formData.append('content', getValues('content'));
+        formData.append('country', getValues('country.value'));
+        formData.append('continent', getValues('country.continent'));
+        // formData.append('categories[]', getValues('categories[]').map(category => category.value).join(','));
+        getValues('categories').forEach(category => {
+            formData.append('categories[]', category.value);
         });
-
-            // Log the contents of formData
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
+        console.log(getValues('main_picture.target.files[0]'))
+        console.log(getValues('main_picture.files'))
+        const file = getValues('main_picture');
+        if (file) {
+            formData.append('main_picture', file);
         }
+        
+        try {
+            const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/add-article', {
+                method: 'POST',
+                //body: JSON.stringify(data),
+                body: formData,
+                // headers: {
+                //     'Content-Type': 'application/json',
+                // },
+            });
+            console.log(getValues())
+            console.log(getValues('country.value'))
+            console.log(getValues('country.continent'))
 
-        // // Example POST request to send form data to the server
-        // const response = await fetch('/api/articles', {
-        //     method: 'POST',
-        //     body: formData,
-        // });
-
-        // if (response.ok) {
-        //     console.log('Article submitted successfully');
-        //     // Handle successful submission here
-        // } else {
-        //     console.error('Failed to submit article');
-        //     // Handle errors here
-        // }
+            if (response.ok) {
+                const  newArticle  = await response.json();
+                console.log(newArticle);
+                setNotification({ type: 'success', message: 'Article submitted successfully' });
+                //navigate("/");
+            } else {
+                const { error } = await response.json();
+                setNotification({ type: 'error', message: `Failed to submit article : ${error}` });
+            }
+        } catch (error) {
+            console.error('Error while posting a message :', error);
+            setNotification({ type: 'error', message: 'An error occurred. Please try again later.' });
+        }
     };
 
 
     return (
         <>
-            <form
-                className="form-add-article"
-                encType="multipart/form-data"
-                onSubmit={submitArticle}
-            >
-                <input type="text" name="title" placeholder="title" required />
-                <textarea type="text" name="content" placeholder="content" required />
-                <Select
-                    id={selectedActivities}
-                    name="activity"
-                    value={selectedActivities}
-                    options={activityOptions}
-                    onChange={handleCategoryChange}
-                    placeholder="Search for a category activity"
-                    isSearchable={true}
-                />
+        <form className="form-add-article" encType="multipart/form-data" onSubmit={handleSubmit(submitArticle)}>
+            <input {...register('title', { required: true, maxLength: 20 })} name='title' placeholder="title" />
+            {errors.title && <p>Title is required.</p>}
 
-                <Select
-                    id={selectedCountry}
-                    name="country"
-                    value={selectedCountry}
-                    onChange={handleCountrySelect}
-                    options={countryOptions}
-                    placeholder="Search for a country"
-                    isSearchable={true}
-                />
-                {/* <input type="file" id="myFile" name="main_picture" /> */}
-                <button type='submit'>Post article</button>
-            </form>
+            <textarea {...register('content', { 
+                    required: true, maxLength: {
+                    value: 100,
+                    message: "Description cannot be longer than 100 characters",
+                } })} 
+                placeholder="content"
+                name='content'
+                rows={10}
+            />
+            {errors.content && <p>Content is required.</p>}
 
-            <div className="tags-container">
-                {tags.map((tag, index) => (
-                    <span key={index} className="tag">
-                        {tag}
-                    </span>
-                ))}
-            </div>
+            <Select
+                {...register('categories')}
+                name='categories[]'
+                // name='categories'
+                options={categoryOptions}
+                onChange={(selected) => {
+                    setValue('categories', selected);
+                }}
+                placeholder="Search for a category"
+                isSearchable={true}
+                isMulti
+            />
+
+            <Select
+                {...register('country', { required: true })}
+                onChange={(selected) => {
+                    setValue('country', selected);
+                }}
+                name='country'
+                options={countryOptions}
+                placeholder="Search for a country"
+                isSearchable={true}
+            />
+            {errors.country && <p>Select a country is required.</p>}
+
+            <input 
+                type='file'
+                name='main_picture'
+                {...register('main_picture')}
+                onChange={handleFileChange}
+             />
+
+            <input className='add-article-button' type="submit" />
+        </form>
         </>
     )
 }
