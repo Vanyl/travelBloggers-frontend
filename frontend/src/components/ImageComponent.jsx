@@ -17,7 +17,7 @@ const ImageComponent = ({ src, alt, onLoad }) => {
         img.src = src;
       }, [src, onLoad]); // Dependency array with src and onLoad to re-run if these props change
     
-      return <img src={src} alt={alt} className={orientationClass} />;
+      return <img src={src} alt={alt} className={`post-img-data ${orientationClass}`} />;
     };
     
     export default ImageComponent;
