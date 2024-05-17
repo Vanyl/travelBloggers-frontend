@@ -29,13 +29,14 @@
         .post-tag-header
             a
                 text-decoration: none
+                text-transform: lowercase
                 color: white
                 font-size: 12px
                 span
                     //background: #39db9a
                     padding: 5px 10px
                     border-radius: 5px
-                &:after
+                &:not(:last-child):after
                     content: "\25A0"
 
         .post-title-header
@@ -47,6 +48,15 @@
             .post-date
                 time
                     font-style: italic
+
+        .post-user-url
+            text-decoration: none
+            color: white
+
+        .main-picture
+            max-height: 400px
+            object-fit: cover
+            object-position: center 10px
 
     .post-time-header
         &:before
@@ -62,13 +72,19 @@
     .post-paragraph
         margin: 50px 0
 
-    .post-img
+
+    .post-img-container
         display: grid
+        gap: 20px
         grid-template-columns: 2fr 1fr
-        grid-template-rows: repeat(2, 1fr)
+        //grid-template-rows: repeat(2, 1fr) //if 3 images
         gap: 20px
         align-items: center
         justify-items: center
+
+    .post-img-data
+        max-height: 450px
+        object-fit: cover
 
         .horizontal 
             grid-row: span 1
@@ -79,14 +95,20 @@
             grid-row: 1 / span 2
             height: 100%
         
-
-
     .comment-section
         max-width: 600px
         margin: auto
         textarea
-            height: 216px
+            height: 150px
+            min-height: 150px
+            max-height: 200px
             width: 100%
+            min-width: 100%
+            max-width: 100%
+            margin-bottom: 15px
+  
+            &:focus
+                outline-color: #39db9a
 
         .comments-number
             text-align: center

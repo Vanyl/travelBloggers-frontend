@@ -3,33 +3,39 @@ import '../sass/article.sass'
 import heroImage from '../assets/images/hero-banner2.jpg'
 import ImageComponent from '../components/ImageComponent';
 
-const Article = () => {
+const Article = ({userData}) => {
+
+    const [data, setData] = useState(null);
+    const [images, setImages] = useState([]);
 
     const [username, setUsername] = useState('');
     const [comment, setComment] = useState('');
     const [email, setEmail] = useState('');
-    const [images, setImages] = useState([]);
     const [isHorizontal, setIsHorizontal] = useState(false);
-    const cityInput = 'spain'
-    const unplashURL = `https://api.unsplash.com/search/photos?page=1&query=${cityInput}&client_id=QamvDmYlvPU_cPDzXQb_zbyDZmBgNKc8wVZPVQi_16g`
     
     useEffect(() => {
-        const fetchImages = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch(unplashURL);
+                console.log('coucou')
+                const response = await fetch(' https://travel-blogger-46c930280c07.herokuapp.com/api/show-article/9');
                 if (response.ok) {
                     const data = await response.json();
-                    setImages(data.results.slice(0, 3)); //change later
+                    console.log(data);
+                    setData(data);
+                    setImages(data.article.images.slice(0, 3)); // Assuming the API provides image URLs directly
                 } else {
-                    console.error('Error fetching images:', response.statusText);
+                    console.error('Error fetching article data:', response.statusText);
                 }
             } catch (error) {
-                console.error('Error fetching images:', error);
+                console.error('Error fetching article data:', error);
             }
         };
     
-        fetchImages();
-    }, [cityInput]); // Dependency array ensures the effect runs when cityInput changes
+        fetchData(); // Call the fetchData function
+    
+        // Note: You can remove the catch block if you're not handling specific errors here
+    }, []);
+
    
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -40,37 +46,56 @@ const Article = () => {
         setIsHorizontal(isHorizontal);
     };
 
+    const displayDate = () => {
+        const createdDate = new Date(data?.article.created_at);
+        const day = createdDate.getDate();
+        const month = createdDate.getMonth() + 1; // Months are zero-based (0 = January)
+        const year = createdDate.getFullYear();
+    
+        const date = `${day}/${month}/${year}`;
+        return date
+    }
+
+    
+
 
     return(
         <div className="container">
             <header className="post-hero-header">
                 <div className="post-img-header">
-                <img src={heroImage} alt="Hero Banner" />
+                {/* <img src={heroImage} alt="Hero Banner" /> */}
+                <img className="main-picture" src={data?.article.image_url} alt="Hero Banner" onLoad={handleImageLoad} />
                 </div>
                 <div className="post-header">
-                    <div className="post-tag-header"><a href=""><span>tag</span></a></div>
-                    <h1 className="post-title-header">title</h1>
+                <div className="post-tag-header">
+                        {data && data.article && data.article.categories.map((category, index) => (
+                            <a href="#" key={index}><span className="post-tag-header">{category.name}</span></a>
+                        ))}
+                        <a href="#"><span className="post-tag-header">{data?.article.continent}</span></a>
+                        <a href="#"><span className="post-tag-header">{data?.article.country}</span></a>
+                    </div>
+                    <h1 className="post-title-header">{data?.article.title}</h1>
                     <div className="post-user-header post-date-header">
-                        <span>by <a className="post-user-url">user </a></span>
-                        <span><time className="post-time-header" dateTime="">11 May 2024</time></span>
+                        <span>by <a href="#" className="post-user-url"><span>{data?.author.name}</span></a></span>
+                        <span><time className="post-time-header" dateTime="">{displayDate()}</time></span>
                     </div>
                 </div>
             </header>
 
             <article>
                 <div className="post-description">
-                    <p className="post-paragraph">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae harum ipsa consectetur aspernatur ea doloribus ut aliquam nesciunt et corporis, numquam accusamus deserunt. Consectetur aspernatur, quo voluptates fugit nobis sit?</p>
+                    <p className="post-paragraph">{data?.article.content}</p>
                 </div>
-                <div className="post-img">
-                    {images.map((image) => (
-                        <ImageComponent
-                            key={image.id}
-                            src={image.urls.small}
-                            alt={image.alt_description}
+                    <div className="post-img-container">
+                        {data?.article.images.map((image, index) => (
+                            <ImageComponent
+                            key={index}
+                            src={image.image_url}
+                            alt="alt"
                             onLoad={handleImageLoad} // Pass the callback to set orientation
                         />
-                    ))}
-                </div>
+                        ))}
+                    </div>
             </article>
 
             <hr/>
