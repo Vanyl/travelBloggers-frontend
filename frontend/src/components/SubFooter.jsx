@@ -1,6 +1,7 @@
 import React from 'react';
 import '../sass/subfooter.sass'; 
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
 
 function SubFooter() {
   return (
@@ -10,10 +11,10 @@ function SubFooter() {
             <div className="quote-author">Wallace Stevens</div>
         </blockquote>
         <div className="sub-footer-footer-content">
-            <h3 className="subfooter-blog-title">Travel Bloggers</h3>
+            <Link to="/" className="link"><h3 className="subfooter-blog-title">Travel Bloggers</h3></Link>
             <div className="sub-link-container">
-              <h4 className="link">About</h4>
-              <h4 className="link">Contact</h4>
+              <Link to="/about" className="link"><h4 className="link">About</h4></Link>
+              <Link to="/contact" className="link"><h4 className="link">Contact</h4></Link>
             </div>
             <div className="sub-social-links">
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
