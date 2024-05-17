@@ -31,14 +31,15 @@ const Posts = () => {
                         </div>
                         {isHovered && (
                             <div className='hover-info'>
-                                <Link to="/article"><p className='title'>{post.title}</p></Link>   
-                                <p className='date'>{post.date}</p>
+                                <Link className='hover-title' to="/article"><p>{post.title}</p></Link>   
+                                <p className='hover-date'>{post.date}</p>
                             </div>
                         )}
                     </div>
                     <div className='info-container'>
                         <div className='avatar'>
-                            <img className='avatar-img' alt="avatar" />
+                            <img className='avatar-img' src={"placeholder.jpg"} alt="avatar" />
+                            {/* userData.avatar ||  */}
                         </div>
                         <p className='user'>{post.user}</p>
                         <p className='tag'>{post.tag}</p>
