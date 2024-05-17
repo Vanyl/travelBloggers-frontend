@@ -10,6 +10,7 @@ import Article from "../pages/Article";
 import Profile from "../components/Profile"
 import ProfileSettings from "../components/ProfileSettings"
 import AddArticle from "../components/AddArticle";
+import ContinentEurope from '../components/ContinentEurope';
 
 
 
@@ -28,6 +29,7 @@ function AppRouter() {
           <Route path="my-account" element = {<Profile />} />
           <Route path="my-account-settings" element = {<ProfileSettings />} />
           <Route path="my-account-add-article" element = {<AddArticle />} />
+          <Route path="/europe" element={<ContinentEurope />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
