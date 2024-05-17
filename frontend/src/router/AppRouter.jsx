@@ -1,4 +1,18 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar'
+import Home from "../pages/Home"
+import About from "../pages/About"
+import Authentication from "../components/Authentication"
+import NoPage from "../pages/NoPage";
+import Contact from "../pages/Contact"
+import Article from "../pages/Article";
+import Profile from "../components/Profile"
+import ProfileSettings from "../components/ProfileSettings"
+import AddArticle from "../components/AddArticle";
+import ContinentEurope from '../components/ContinentEurope';
 // AppRouter.js
+
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -52,23 +66,24 @@ function AppRouter() {
   };
 
   return (
-    <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} handleLogout={handleLogout} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/article" element={<Article />} />
-        {isLoggedIn && (
+      <BrowserRouter>
+          <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
+          <Route path="about" element = {<About/>} />
+          <Route path="contact" element = {<Contact/>} />
+          <Route path="article" element = {<Article />} />
+          {isLoggedIn && (
           <Route path="/my-account" element={<Profile userData={userData} />} />
-        )}
-        <Route path="/my-account-settings" element={<ProfileSettings />} />
-        <Route path="/my-account-add-article" element={<AddArticle />} />
-        <Route path="*" element={<NoPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+          )}
+          <Route path="my-account-settings" element = {<ProfileSettings />} />
+          <Route path="my-account-add-article" element = {<AddArticle />} />
+          <Route path="/europe" element={<ContinentEurope />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+  )
 }
 
 export default AppRouter;
