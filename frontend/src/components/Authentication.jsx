@@ -10,6 +10,7 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
 
     const toggleLogin = () => {
         setIsSignUp(!isSignUp);
+        setError(null) //clear error
     };
 
     const onSubmitLogin = async (event) => {
@@ -63,7 +64,7 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
                 const  newUser  = await response.json();
                 console.log(newUser);
                 setNotification({ type: 'success', message: 'You have been successfully registered ! You can log in now with your email.' });
-                navigate("/");
+                setIsSignUp(false); // Switch to login form after successful registration
             } else {
                 const { error } = await response.json();
                 setNotification({ type: 'error', message: `Registration failed: ${error}` });
@@ -78,7 +79,7 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
         if (isSignUp) {
             return (
                 <form className="register-form" onSubmit={onSubmitRegister}>
-                    <input type="text" name="email" placeholder="Email" required/>
+                    <input type="email" name="email" placeholder="Email" required/>
                     <input type="text" name="name" placeholder="Username" required/>
                     <input type="password" name="password" placeholder="Password" required/>
                     <button type='submit'>register</button>
@@ -88,7 +89,7 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
         } else {
             return (
                 <form className="login-form" onSubmit={onSubmitLogin}>
-                    <input type="text" name="email" placeholder="Email" required/>
+                    <input type="email" name="email" placeholder="Email" required/>
                     <input type="password" name="password" placeholder="Password" required/>
                     <button type='submit'>login</button>
                     <p className="message">Not registered? <a onClick={toggleLogin} href="#">Create an account</a></p>
@@ -102,7 +103,8 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
             <div className="login-page">
                 <div className="form-authentication authentication-container">
                     <AuthenticationForm />
-                    {error && <p>{error}</p>}
+                    {error && <p className="error-message">{error}</p>}
+                    {notification && <p className={`notification ${notification.type}`}>{notification.message}</p>}
                 </div>
             </div>
         </div>

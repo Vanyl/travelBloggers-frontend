@@ -1,5 +1,13 @@
+
+import SubFooter from '../components/SubFooter'
+
 const About = () => {
-    return <div>This is the About page</div>;
+  
+    return (
+      <>
+        <SubFooter/>
+      </>
+    )
   };
   
   export default About;

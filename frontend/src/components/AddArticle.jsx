@@ -162,7 +162,7 @@ const AddArticle = () => {
             />
             {errors.country && <p>Select a country is required.</p>}
             <div>
-            <label>Main Picture:</label>
+            <label>Main Picture: </label>
             <input 
                 type='file'
                 name='main_picture'
@@ -171,7 +171,7 @@ const AddArticle = () => {
              />
             </div>
             <div>
-            <label>Images:</label>
+            <label>Images: </label>
             {/* <input 
                 type='file'
                 name='images[]'
@@ -184,7 +184,7 @@ const AddArticle = () => {
                 ))}
             </div>
 
-            <input className='add-article-button' type="submit" />
+            <input className='form-add-article-button' type="submit" />
         </form>
         </>
     )

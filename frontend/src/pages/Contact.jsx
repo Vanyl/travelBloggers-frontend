@@ -1,4 +1,5 @@
 import '../sass/contact.sass'
+import SubFooter from '../components/SubFooter'
 
 const Contact = () => {
 
@@ -27,6 +28,7 @@ const Contact = () => {
               <button type='submit'>contact</button>
             </form>
           </div>
+          <SubFooter/>
       </>
     )
   };
