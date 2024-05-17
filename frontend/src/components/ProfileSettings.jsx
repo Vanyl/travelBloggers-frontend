@@ -56,7 +56,7 @@ const ProfileSettings = () => {
             </div>
             <button className="green-button" onClick={handleSaveChanges}>Save Changes</button>
             <button onClick={handleDeleteAccount}>Delete Account</button>
-            <h2>My Articles</h2>
+            <h2 className='profile-settings-my-article-title'>My Articles</h2>
             <div className="feed-grid">
                 {/* Map through user's articles and display them */}
                 {articles.map(article => (
