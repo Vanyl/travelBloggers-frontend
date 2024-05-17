@@ -140,7 +140,7 @@ const Article = ({userData}) => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            <button type="submit" >Comment!</button>
+                            <button className="btn-comment" type="submit" >Comment!</button>
                         </div>
                     </form>
                 </div>
