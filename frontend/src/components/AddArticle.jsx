@@ -4,17 +4,19 @@ import Select from 'react-select';
 import { useForm } from "react-hook-form"
 
 const AddArticle = () => {
-    // const [tags, setTags] = useState([]);
-    // const [selectedCategories, setSelectedCategories] = useState([]);
-    // const [selectedCountry, setSelectedCountry] = useState(null);
-    // const [selectedFile, setSelectedFile] = useState(null);
-
+    const { register, handleSubmit, setValue, getValues, watch , formState: { errors } } = useForm();
+    
     const [countryOptions, setCountryOptions] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
     const [notification, setNotification] = useState(null);
     const [selectedFileName, setSelectedFileName] = useState('');
+    // const [selectedFile, setSelectedFile] = useState(null);
 
-    const { register, handleSubmit, setValue, getValues, formState: { errors } } = useForm();
+    const [file, setFile] = useState(null);
+
+    const mainPicture = watch('main_picture');
+    const images = watch('images');
+
 
     //retrieve categories
     useEffect(() => {
@@ -56,30 +58,36 @@ const AddArticle = () => {
         }
     };
 
-
-    // const handleFileSelect = (event) => {
-    //     setSelectedFile(event.target.files[0]);
-    // };
-
     // //sending to db
     const submitArticle = async (data) => {
         console.log(data);
-        // data.preventDefault();
         const formData = new FormData(data.target);
-        formData.append('title', getValues('title'));
-        formData.append('content', getValues('content'));
-        formData.append('country', getValues('country.value'));
+        formData.append('title', data.title);
+        formData.append('content', data.content);
+        formData.append('country', data.country.value);
         formData.append('continent', getValues('country.continent'));
-        // formData.append('categories[]', getValues('categories[]').map(category => category.value).join(','));
         getValues('categories').forEach(category => {
             formData.append('categories[]', category.value);
         });
-        console.log(getValues('main_picture.target.files[0]'))
-        console.log(getValues('main_picture.files'))
+        // const fileImages = getValues('images[]');
+        // if (fileImages) {
+        //     formData.append('images[]', fileImages);
+        // }
+        // // //console.log(getValues('main_picture.target.files[0]'))
+        // // //console.log(getValues('main_picture.files'))
         const file = getValues('main_picture');
         if (file) {
             formData.append('main_picture', file);
         }
+        // formData.append('main_picture', data.main_picture[0]);
+
+        for (let i = 0; i < data.images.length; i++) {
+            formData.append(`images[${i}]`, data.images[i]);
+        }
+
+        // formData.append('categories', data.categories);
+
+        console.log(formData)
         
         try {
             const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/add-article', {
@@ -87,25 +95,27 @@ const AddArticle = () => {
                 //body: JSON.stringify(data),
                 body: formData,
                 // headers: {
-                //     'Content-Type': 'application/json',
+                //     'Content-Type':  'multipart/form-data'
                 // },
             });
             console.log(getValues())
-            console.log(getValues('country.value'))
-            console.log(getValues('country.continent'))
+            console.log(formData)
 
+            const result = await response.json();
             if (response.ok) {
-                const  newArticle  = await response.json();
-                console.log(newArticle);
-                setNotification({ type: 'success', message: 'Article submitted successfully' });
-                //navigate("/");
+                //const  newArticle  = await response.json();
+                //console.log(newArticle);
+                console.log(result.message)
+                //setNotification({ type: 'success', message: 'Article submitted successfully' });
             } else {
-                const { error } = await response.json();
-                setNotification({ type: 'error', message: `Failed to submit article : ${error}` });
+                alert('Error uploading article: ' + result.message);
+                // const { error } = await response.json();
+                // setNotification({ type: 'error', message: `Failed to submit article : ${error}` });
             }
         } catch (error) {
             console.error('Error while posting a message :', error);
-            setNotification({ type: 'error', message: 'An error occurred. Please try again later.' });
+            alert('Error uploading article');
+            //setNotification({ type: 'error', message: 'An error occurred. Please try again later.' });
         }
     };
 
@@ -151,13 +161,28 @@ const AddArticle = () => {
                 isSearchable={true}
             />
             {errors.country && <p>Select a country is required.</p>}
-
+            <div>
+            <label>Main Picture:</label>
             <input 
                 type='file'
                 name='main_picture'
                 {...register('main_picture')}
-                onChange={handleFileChange}
+                //onChange={handleFileChange}
              />
+            </div>
+            <div>
+            <label>Images:</label>
+            {/* <input 
+                type='file'
+                name='images[]'
+                multiple
+                {...register('images')}
+                //onChange={handleFileChange}
+             /> */}
+             {[0, 1, 2].map((index) => (
+                <input key={index} type="file" {...register(`images[${index}]`)} />
+                ))}
+            </div>
 
             <input className='add-article-button' type="submit" />
         </form>
