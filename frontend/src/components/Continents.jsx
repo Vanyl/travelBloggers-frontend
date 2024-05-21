@@ -37,12 +37,12 @@ const Continents = () => {
       {
         svg: <SouthAmericaSVG />,
         name: 'South America',
-        link: '/south-america',
+        link: '/southamerica',
       },
       {
         svg: <NorthAmericaSVG />,
         name: 'North America',
-        link: '/north-america',
+        link: '/northamerica',
       },
     ];
   
