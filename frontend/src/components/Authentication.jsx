@@ -1,12 +1,46 @@
 import '../sass/authentication.sass';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
+const Authentication = ({ isLoggedIn, setIsLoggedIn }) => {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isSignUp, setIsSignUp] = useState(false);
     const [notification, setNotification] = useState(null);
+
+    // Fonction pour récupérer les informations de l'utilisateur
+    const fetchUserData = async () => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken) {
+            try {
+                const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/my-articles', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Data received from server:", data);
+                    const user = data.articles[0]?.user || null;
+                    // Mise à jour de l'état de l'utilisateur
+                    setIsLoggedIn(true);
+                } else {
+                    console.error('Failed to fetch data:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+    };
+
+    // Utilisez useEffect pour charger les informations de l'utilisateur une fois que l'utilisateur est connecté
+    useEffect(() => {
+        if (isLoggedIn) {
+            fetchUserData();
+        }
+    }, [isLoggedIn]); // Déclenchez cette fonction à chaque fois que isLoggedIn change
 
     const toggleLogin = () => {
         setIsSignUp(!isSignUp);
@@ -43,7 +77,6 @@ const Authentication = ({isLoggedIn, setIsLoggedIn}) => {
             setError('An unexpected error occurred. Please try again later.');
         }
     };
-
 
     const onSubmitRegister = async (event)  => {
         event.preventDefault(); // Prevent default form submission behavior
