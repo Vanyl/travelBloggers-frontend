@@ -66,12 +66,13 @@ function AppRouter() {
           <>
             <Route path="/my-account" element={<Profile userData={userData} />} />
             <Route path="/my-account-settings" element={<ProfileSettings userData={userData} accessToken={accessToken} />} />
+            <Route path="my-account-add-article" element = {<AddArticle accessToken={accessToken} />} />
+
           </>
-        )}
-        <Route path="my-account-add-article" element={<AddArticle />} />
-        <Route path="/europe" element={<ContinentEurope />} />
-        <Route path="*" element={<NoPage />} />
-      </Routes>
+          )}
+          <Route path="/europe" element={<ContinentEurope />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
     </BrowserRouter>
   );
 }
