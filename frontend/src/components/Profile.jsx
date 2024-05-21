@@ -52,21 +52,17 @@ const Profile = ({ userData }) => {
           Favorites
         </button>
       </div>
+
       <div className="feed-grid">
         {/* Articles seront ajoutés dynamiquement ici */}
         {/* Placeholder pour les articles */}
-        <div className="feed-item">
-          <img src="article1.jpg" alt="Article 1" />
-          <h3>Titre de l'article 1</h3>
-        </div>
-        <div className="feed-item">
-          <img src="article2.jpg" alt="Article 2" />
-          <h3>Titre de l'article 2</h3>
-        </div>
-        <div className="feed-item">
-          <img src="article3.jpg" alt="Article 3" />
-          <h3>Titre de l'article 3</h3>
-        </div>
+        {console.log("UserData:", userData)}
+        {userData.articles && userData.articles.map((article) => (
+          <div className="feed-item" key={article.id}>
+            <img src={article.image_url} alt={`Article ${article.id}`} />
+            <h3>{article.title}</h3>
+          </div>
+        ))}
         {/* Ajoutez plus de placeholder ici */}
       </div>
       <div className="add-article-button" onClick={handleAddArticle}>
