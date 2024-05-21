@@ -1,43 +1,69 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
+import '../sass/continentEurope.sass'
 
 // Créer une liste des pays européens a recup
 const europeanCountries = [
   {
-    name: 'Spain',
-    bannerImage: '/src/assets/images/spain-topbanner.jpg', 
-    slug: 'spain' 
+    name: 'Belgium',
+    bannerImage: '/src/assets/images/belgium-topbanner.jpg', 
+    slug: 'Belgium' 
   },
-
+  
+  {
+    name: 'Croatia',
+    bannerImage: '/src/assets/images/croatia-topbanner.jpg', 
+    slug: 'Croatia' // ajuster logique de routage
+  },
+  
+  {
+    name: 'France',
+    bannerImage: '/src/assets/images/france-topbanner.jpg', 
+    slug: 'France' // ajuster logique de routage
+  },
+  
+  {
+    name: 'Germany',
+    bannerImage: '/src/assets/images/germany-topbanner.jpg', 
+    slug: 'Germany' // ajuster logique de routage
+  },
+  
+  {
+    name: 'Greece',
+    bannerImage: '/src/assets/images/greece-topbanner.jpg', 
+    slug: 'Greece' // ajuster logique de routage
+  },
+  
+  {
+    name: 'Italy',
+    bannerImage: '/src/assets/images/italy-topbanner.jpg', 
+    slug: 'Italy' 
+  },
+  
+  {
+    name: 'Netherlands',
+    bannerImage: '/src/assets/images/netherlands-topbanner.jpg', 
+    slug: 'Netherlands' // ajuster logique de routage
+  },
+  
   {
     name: 'Spain',
     bannerImage: '/src/assets/images/spain-topbanner.jpg', 
-    slug: 'spain' 
+    slug: 'Spain' 
   },
-
+  
   {
-    name: 'Spain',
-    bannerImage: '/src/assets/images/spain-topbanner.jpg', 
-    slug: 'spain' 
-  },
+    name: 'Switzerland',
+    bannerImage: '/src/assets/images/switzerland-topbanner.jpg', 
+    slug: 'Switzerland' // ajuster logique de routage
+  }
+  
 
-  {
-    name: 'Spain',
-    bannerImage: '/src/assets/images/spain-topbanner.jpg', 
-    slug: 'spain' 
-  },
 
-  {
-    name: 'Spain',
-    bannerImage: '/src/assets/images/spain-topbanner.jpg', 
-    slug: 'spain' // ajuster logique de routage
-  },
 
-  {
-    name: 'Spain',
-    bannerImage: '/src/assets/images/spain-topbanner.jpg', 
-    slug: 'spain' // ajuster logique de routage
-  },
+
+
+
   // Ajouter d'autres pays européens ici
 ];
 
