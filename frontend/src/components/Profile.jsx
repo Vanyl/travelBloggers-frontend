@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../sass/profile.sass';
 import { FaCog, FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,7 @@ const Profile = ({ userData }) => {
     // Logique pour ajouter un nouvel article
   };
 
-  // Ajoutez une vérification pour vous assurer que userData est défini
+  // Vérification pour s'assurer que userData est défini
   if (!userData) {
     return <div>Loading...</div>;
   }
@@ -37,10 +37,10 @@ const Profile = ({ userData }) => {
           <h1>{userData.name}</h1>
           <p>{userData.description}</p>
         </div>
-        <div className="settings-button" onClick={handleSettingsButtonClick}>
+        <div className="settings-button">
           <Link to={{
               pathname: "/my-account-settings",
-              state: { userData: userData }
+              state: { updatedUserData: userData }
           }}>
               <FaCog />
           </Link>
