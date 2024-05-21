@@ -17,10 +17,10 @@ import ContinentEurope from "../components/ContinentEurope";
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchData = async () => {
-      const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
         try {
           const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/my-articles', {
@@ -66,13 +66,9 @@ function AppRouter() {
           <Route path="/my-account" element={<Profile userData={userData} />} />
           )}
           <Route path="my-account-settings" element = {<ProfileSettings />} />
-          <Route path="my-account-add-article" element = {<AddArticle />} />
+          <Route path="my-account-add-article" element = {<AddArticle accessToken={accessToken} />} />
 
           <Route path="/europe" element={<ContinentEurope />} />
-
-
-
-          
 
           <Route path="*" element={<NoPage />} />
         </Routes>
