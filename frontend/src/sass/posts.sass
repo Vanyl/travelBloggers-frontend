@@ -2,6 +2,7 @@
   display: grid
   grid-template-columns: 1fr 1fr 1fr
   margin-top: 100px
+  color: #1E2146
 
   .post-container
     display: flex
@@ -38,15 +39,17 @@
         flex-direction: column
         justify-content: center
         align-items: center
-        color: #fff
+        color: #1E2146
         opacity: 0
         transition: opacity 0.5s linear
         visibility: hidden
+        font-weight: bold
 
-        .title
-          font-weight: bold
+        .hover-title
+          text-decoration: none
+          color: #1E2146
 
-        .date
+        .hover-date
           font-style: italic
 
       .img-overlay
@@ -84,3 +87,9 @@
   margin-top: 10px
   padding: 0 5px
 
+@media (max-width: 768px)
+  .posts-container
+    grid-template-columns: 1fr
+
+  .post-container
+    flex-direction: column

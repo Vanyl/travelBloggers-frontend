@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar'
 import Home from "../pages/Home"
 import About from "../pages/About"
@@ -54,6 +54,41 @@ import CountryCanada from "../components/CountryCanada";
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        try {
+          const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/my-articles', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log("Data received from server:", data);
+            setUserData(data.user);
+            setIsLoggedIn(true);
+          } else {
+            console.error('Failed to fetch data:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setIsLoggedIn(false);
+  };
 
   return (
       <BrowserRouter>
@@ -63,8 +98,10 @@ function AppRouter() {
           <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
           <Route path="about" element = {<About/>} />
           <Route path="contact" element = {<Contact/>} />
-          <Route path="article" element = {<Article />} />
-          <Route path="my-account" element = {<Profile />} />
+          <Route path="article" element = {<Article userData={userData} />} />
+          {isLoggedIn && (
+          <Route path="/my-account" element={<Profile userData={userData} />} />
+          )}
           <Route path="my-account-settings" element = {<ProfileSettings />} />
           <Route path="my-account-add-article" element = {<AddArticle />} />
 
@@ -118,4 +155,4 @@ function AppRouter() {
   )
 }
 
-export default AppRouter
+export default AppRouter;

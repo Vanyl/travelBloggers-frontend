@@ -26,7 +26,8 @@
             flex: 1
             margin-left: 50px
 
-        .settings-button
+        .settings-button,
+        .settings-button a
             cursor: pointer
             display: inline-flex
             align-items: center
@@ -43,19 +44,7 @@
 
             &:hover
                 color: #39db9a
-                animation: rotateCog 3.8s infinite
-
-    @keyframes rotateCog 
-        0% 
-            transform: rotate(0deg)
         
-        100% 
-            transform: rotate(360deg)
-        
-    
-
-
-
     .feed-header 
         margin-top: 20px
         text-align: center
@@ -115,12 +104,11 @@
     margin-top: 10px
     padding: 0 5px
 
-
-
-.add-article-button 
+.add-article-button,
+.add-article-button a 
     position: fixed
-    bottom: 50px
-    right: 250px
+    bottom: 25px
+    right: 10%
     background-color: #39db9a
     color: white
     width: 60px
@@ -133,7 +121,5 @@
     cursor: pointer
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2)
 
-
-.add-article-button:hover 
-    background-color: #2ec58b
-
+    &:hover 
+        background-color: #2ec58b

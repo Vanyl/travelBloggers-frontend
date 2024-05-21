@@ -6,6 +6,7 @@
         position: relative
         margin-top: 65px
         z-index: 1
+
         .post-img-header
             img
                 width: 100%
@@ -29,13 +30,15 @@
         .post-tag-header
             a
                 text-decoration: none
+                text-transform: lowercase
                 color: white
                 font-size: 12px
+
                 span
-                    //background: #39db9a
                     padding: 5px 10px
                     border-radius: 5px
-                &:after
+
+                &:not(:last-child):after
                     content: "\25A0"
 
         .post-title-header
@@ -47,6 +50,15 @@
             .post-date
                 time
                     font-style: italic
+
+        .post-user-url
+            text-decoration: none
+            color: white
+
+        .main-picture
+            max-height: 400px
+            object-fit: cover
+            object-position: center 10px
 
     .post-time-header
         &:before
@@ -62,44 +74,55 @@
     .post-paragraph
         margin: 50px 0
 
-    .post-img
+    .post-img-container
         display: grid
         grid-template-columns: 2fr 1fr
-        grid-template-rows: repeat(2, 1fr)
         gap: 20px
         align-items: center
         justify-items: center
+
+    .post-img-data
+        max-height: 450px
+        object-fit: cover
 
         .horizontal 
             grid-row: span 1
             height: 90%
 
         .vertical
-            grid-column : 2
+            grid-column: 2
             grid-row: 1 / span 2
             height: 100%
-        
-
 
     .comment-section
         max-width: 600px
         margin: auto
+
         textarea
-            height: 216px
+            height: 150px
+            min-height: 150px
+            max-height: 200px
             width: 100%
+            min-width: 100%
+            max-width: 100%
+            margin-bottom: 15px
+
+            &:focus
+                outline-color: #39db9a
 
         .comments-number
             text-align: center
             display: table
             margin: 0 auto
-        
+
         .comment-row
             display: flex
             gap: 15px
+
             input
                 text-align: center
 
-        button
+        .btn-comment
             font-family: "Roboto", sans-serif
             text-transform: uppercase
             outline: 0
@@ -113,7 +136,7 @@
             transition: background 0.3s ease, color 0.3s ease
             cursor: pointer
 
-        button:hover, button:active, button:focus
+        .btn-comment:hover, .btn-comment:active, .btn-comment:focus
             background: darken(#39db9a, 10%) 
 
     hr 
@@ -122,3 +145,31 @@
         height: 0
         border-top: 1px solid rgba(0, 0, 0, 0.2)
         border-bottom: 1px solid rgba(255, 255, 255, 0.3)
+
+@media (max-width: 768px)
+    .container
+        .post-img-container
+            margin : 0 20px
+            grid-template-columns: 1fr 
+
+            .post-img-data
+                width: 100%
+
+                .horizontal, .vertical
+                    grid-column: auto
+                    grid-row: auto
+
+        .comments-area,
+        .comment-respond
+            margin: 0 20px
+
+        .comment-respond input 
+            padding: 15px
+
+        .comment-row
+            flex-direction: column
+            align-items: center
+
+        .comment-section .btn-comment
+            width: 50%
+
