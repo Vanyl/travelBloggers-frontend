@@ -10,6 +10,7 @@ const europeanCountries = [
         slug: 'Algeria' 
       },
       
+      
       {
         name: 'Kenya',
         bannerImage: '/src/assets/images/kenya-topbanner.jpg', 
