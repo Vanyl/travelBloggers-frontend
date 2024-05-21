@@ -27,14 +27,15 @@ function AppRouter() {
               Authorization: `Bearer ${accessToken}`,
             },
           });
-
+  
           if (response.ok) {
             const data = await response.json();
             console.log("Data received from server:", data);
-            if (data.articles.length > 0) {
-              const user = { ...data.articles[0].user, articles: data.articles };
-              setUserData(user);
-            }
+  
+            // Si l'utilisateur n'a pas d'articles, utilisez les informations utilisateur de la réponse
+            const user = data.user || (data.articles.length > 0 ? { ...data.articles[0].user, articles: data.articles } : { ...data.user, articles: [] });
+            setUserData(user);
+  
             setIsLoggedIn(true);
           } else {
             console.error('Failed to fetch data:', response.statusText);
@@ -44,10 +45,10 @@ function AppRouter() {
         }
       }
     };
-
+  
     fetchData();
   }, [isLoggedIn]); // Récupérer les données de l'utilisateur chaque fois que l'état de connexion change
-
+  
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
     setIsLoggedIn(false);

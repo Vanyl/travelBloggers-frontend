@@ -27,7 +27,6 @@ const Profile = ({ userData }) => {
     <div className="profile-container">
       <div className="profile-info">
         <div className="profile-picture">
-          {/* Vérifiez que avatar est défini avant d'essayer d'accéder à son URL */}
           {userData.avatar ? (
             <img src={userData.avatar} alt="User's Profile Picture" />
           ) : (
@@ -54,16 +53,12 @@ const Profile = ({ userData }) => {
       </div>
 
       <div className="feed-grid">
-        {/* Articles seront ajoutés dynamiquement ici */}
-        {/* Placeholder pour les articles */}
-        {console.log("UserData:", userData)}
         {userData.articles && userData.articles.map((article) => (
           <div className="feed-item" key={article.id}>
             <img src={article.image_url} alt={`Article ${article.id}`} />
             <h3>{article.title}</h3>
           </div>
         ))}
-        {/* Ajoutez plus de placeholder ici */}
       </div>
       <div className="add-article-button" onClick={handleAddArticle}>
         <Link to="/my-account-add-article">
