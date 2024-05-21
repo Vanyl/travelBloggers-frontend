@@ -38,8 +38,11 @@ const Profile = ({ userData }) => {
           <p>{userData.description}</p>
         </div>
         <div className="settings-button" onClick={handleSettingsButtonClick}>
-          <Link to="/my-account-settings">
-            <FaCog />
+          <Link to={{
+              pathname: "/my-account-settings",
+              state: { userData: userData }
+          }}>
+              <FaCog />
           </Link>
         </div>
       </div>
