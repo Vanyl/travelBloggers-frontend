@@ -11,6 +11,7 @@ import Profile from "../components/Profile";
 import ProfileSettings from "../components/ProfileSettings";
 import AddArticle from "../components/AddArticle";
 import ContinentEurope from "../components/ContinentEurope";
+import EditArticle from "../components/EditArticle";
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,7 +68,7 @@ function AppRouter() {
             <Route path="/my-account" element={<Profile userData={userData} />} />
             <Route path="/my-account-settings" element={<ProfileSettings userData={userData} accessToken={accessToken} />} />
             <Route path="my-account-add-article" element = {<AddArticle accessToken={accessToken} />} />
-
+            <Route path="my-account-edit-article" element = {<EditArticle accessToken={accessToken} />} />
           </>
           )}
           <Route path="/europe" element={<ContinentEurope />} />

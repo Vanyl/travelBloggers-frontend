@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../sass/profile-settings.sass';
 import { FaCog } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const ProfileSettings = ({ userData, accessToken }) => {
   const [name, setName] = useState('');
@@ -99,8 +101,10 @@ const ProfileSettings = ({ userData, accessToken }) => {
           <div className="feed-item" key={article.id}>
             <img src={article.image_url} alt={`Article ${article.id}`} />
             <h3>{article.title}</h3>
-            <button className="edit-button" onClick={() => console.log('Edit button clicked')}><FaCog /></button>
-            <button className="delete-button" onClick={() => handleDeleteArticle(article.id)}>Delete</button>
+            <div className='btn-articles'>
+              <button className="edit-button"><Link to="/my-account-edit-article" className="edit-button">Edit</Link></button>
+              <button className="delete-button" onClick={() => handleDeleteArticle(article.id)}>Delete</button>
+            </div>
           </div>
         ))}
       </div>
