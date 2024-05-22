@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import '../sass/article.sass'
 import heroImage from '../assets/images/hero-banner2.jpg'
 import ImageComponent from '../components/ImageComponent';
+import { useParams } from 'react-router-dom'; 
 
 const Article = ({userData}) => {
 
@@ -12,12 +13,15 @@ const Article = ({userData}) => {
     const [comment, setComment] = useState('');
     const [email, setEmail] = useState('');
     const [isHorizontal, setIsHorizontal] = useState(false);
-    
+
+    const { articleId } = useParams()
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 console.log('coucou')
-                const response = await fetch(' https://travel-blogger-46c930280c07.herokuapp.com/api/show-article/10');
+                 const response = await fetch(`https://travel-blogger-46c930280c07.herokuapp.com/api/show-article/${articleId}`);
+              
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data);

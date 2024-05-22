@@ -1,48 +1,57 @@
-import React, { useState } from 'react';
-import heroBanner2 from '../assets/images/hero-banner2.jpg';
-import '../sass/posts.sass';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../sass/posts.sass';
 
 const Posts = () => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [postsData, setPostsData] = useState([]);
 
-    // Create an array of data for your posts (you can replace this with actual data)
-    const postsData = [
-        { id: 1, title: 'Post 1', date: '2024-05-08', user: 'User 1', tag: 'Country A' },
-        { id: 2, title: 'Post 2', date: '2024-05-09', user: 'User 2', tag: 'Country B' },
-        { id: 3, title: 'Post 3', date: '2024-05-10', user: 'User 3', tag: 'Country C' },
-        { id: 4, title: 'Post 4', date: '2024-05-08', user: 'User 1', tag: 'Country A' },
-        { id: 5, title: 'Post 5', date: '2024-05-09', user: 'User 2', tag: 'Country B' },
-        { id: 6, title: 'Post 6', date: '2024-05-10', user: 'User 3', tag: 'Country C' }
-    ];
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/show-all');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setPostsData(data.articles.slice(0, 6)); // Prends seulement les 6 premiers articles
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
 
     return (
         <div className="posts-container">
             {postsData.map((post) => (
-                <div
-                    key={post.id}
-                    className='post-container'
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                >
+                <div key={post.id} className='post-container'>
                     <div className="image-container">
-                        <div className="img-overlay">
-                        <img className="post-img" src={heroBanner2} alt="post" />
+                        <img className="post-img" src={post.image_url} alt="post" />
+                        <div className='hover-info'>
+                            <Link className='hover-title' to={`/article/${post.id}`}><p>{post.title}</p></Link>
+                            <p className='hover-date'>{formatDate(post.created_at)}</p>
                         </div>
-                        {isHovered && (
-                            <div className='hover-info'>
-                                <Link className='hover-title' to="/article"><p>{post.title}</p></Link>   
-                                <p className='hover-date'>{post.date}</p>
-                            </div>
-                        )}
                     </div>
                     <div className='info-container'>
                         <div className='avatar'>
-                            <img className='avatar-img' src={"placeholder.jpg"} alt="avatar" />
-                            {/* userData.avatar ||  */}
+                            <img className='avatar-img' src={post.user.avatar || 'placeholder.jpg'} alt="avatar" />
                         </div>
-                        <p className='user'>{post.user}</p>
-                        <p className='tag'>{post.tag}</p>
+                        <p className='user'>{post.user.name}</p>
+                        <div className='tags'>
+                            {post.categories && post.categories.length > 0 ? (
+                                post.categories.map(category => (
+                                    <span key={category.id} className='tag'>{category.name}</span>
+                                ))
+                            ) : (
+                                <span className='tag'>{post.continent}</span>
+                            )}
+                        </div>
                     </div>
                 </div>
             ))}
