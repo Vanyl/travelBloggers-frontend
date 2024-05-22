@@ -104,13 +104,13 @@ const AddArticle = ({accessToken}) => {
     return (
         <>
             <form className="form-add-article" encType="multipart/form-data" onSubmit={handleSubmit(submitArticle)}>
-                <input {...register('title', { required: true, maxLength: 20 })} name='title' placeholder="title" />
+                <input {...register('title', { required: true, maxLength: 30 })} name='title' placeholder="title" />
                 {errors.title && <p>Title is required.</p>}
 
                 <textarea {...register('content', {
                     required: true, maxLength: {
-                        value: 100,
-                        message: "Description cannot be longer than 100 characters",
+                        value: 5000,
+                        message: "Description cannot be longer than 5000 characters",
                     }
                 })}
                     placeholder="content"
