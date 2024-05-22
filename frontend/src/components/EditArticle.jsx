@@ -2,23 +2,30 @@ import { useForm } from "react-hook-form"
 import { useState, useEffect, useRef } from "react";
 import Select from 'react-select';
 import '../sass/editArticle.sass'
+import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom'; // Import useParams hook
+
 
 const EditArticle = ({ accessToken }) => {
     const { register, handleSubmit, setValue, getValues, watch, formState: { errors } } = useForm();
     const [countryOptions, setCountryOptions] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
     const mainPictureRef = useRef(null);
-    const articleId = 10;
+    const navigate = useNavigate();
+
+    //const articleId = 1;
+    const { articleId } = useParams()
 
     //retrieve article values
     useEffect(() => {
         fetch(`https://travel-blogger-46c930280c07.herokuapp.com/api/show-article/${articleId}`)
             .then(response => response.json())
-            .then(article => {
+            .then(data => {
+                const article = data.article;
                 setValue('title', article.title);
                 setValue('content', article.content);
                 setValue('country', { value: article.country, label: article.country });
-                //setValue('categories', article.categories.map(cat => ({ value: cat.id, label: cat.name })));
+                setValue('categories', article.categories.map(cat => ({ value: cat.id, label: cat.name })));
             })
             .catch(error => {
                 console.error('Error fetching article data:', error);
@@ -95,6 +102,7 @@ const EditArticle = ({ accessToken }) => {
                 content: data.content,
                 country: data.country.value,
                 continent: data.country.continent,
+                categories: data.categories.map(category => category.value)
             };
         }
 
@@ -122,6 +130,8 @@ const EditArticle = ({ accessToken }) => {
 
             if (response.ok) {
                 console.log(result.message)
+                navigate("/my-account");
+                window.location.reload();
             } else {
                 alert('Error uploading article: ' + result.message);
             }
@@ -133,18 +143,18 @@ const EditArticle = ({ accessToken }) => {
 
     return (
         <form className="form-edit-article" encType="multipart/form-data" onSubmit={handleSubmit(editArticle)}>
-            <input {...register('title', { maxLength: 20 })} name='title' placeholder="title" defaultValue={getValues('title')} />
+            <input {...register('title', 
+            { maxLength: 20 })} 
+            name='title' 
+            placeholder="title" 
+            defaultValue={watch('title')}
+            />
 
-            <textarea {...register('content', {
-                maxLength: {
-                    value: 100,
-                    message: "Description cannot be longer than 100 characters",
-                }
-            })}
+            <textarea {...register('content')}
                 placeholder="content"
                 name='content'
                 rows={10}
-                defaultValue={getValues('content')}
+                defaultValue={watch('content')}
             />
 
             <Select
@@ -156,6 +166,7 @@ const EditArticle = ({ accessToken }) => {
                 placeholder="Search for a category"
                 isSearchable={true}
                 isMulti
+                value={watch('categories')}
             />
 
             <Select
@@ -166,6 +177,7 @@ const EditArticle = ({ accessToken }) => {
                 }}
                 placeholder="Search for a country"
                 isSearchable={true}
+                value={watch('country')}
             />
 
             <div>
@@ -187,7 +199,7 @@ const EditArticle = ({ accessToken }) => {
                     {...register('images')}
                 />
             </div>
-            <input className='form-edit-article-button' type="submit"  placeholder="test" />
+            <button className='form-edit-article-button' type="submit">Edit article</button>
         </form>
     )
 }
