@@ -1,0 +1,133 @@
+.continent-article-container
+  width: 100%
+
+  .continent-article-banner
+    background-size: cover
+    background-position: center
+    color: white
+    padding: 50px
+    //text-align: center
+    height: 20vh
+    width: 100%
+    display: flex
+    flex-direction: column
+    //justify-content: center
+    //align-items: center
+    margin-bottom: 20px
+
+    h1
+      font-size: 3rem
+      margin-bottom: 10px
+      color: white
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2)
+
+    p
+      font-size: 1.2rem
+      color: white
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2)
+      max-width: 800px
+      margin: 0 50px
+      text-align: justify
+
+  .filters
+    margin: 20px 0
+
+  .continent-article-list
+    padding: 20px
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    gap: 20px
+    justify-content: center
+
+    .continent-article-card
+      background: #fff
+      padding: 20px
+      border-radius: 10px
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+      flex: 1 1 calc(33.333% - 20px)
+      overflow: hidden
+      transition: all 0.3s ease-in-out
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+
+      &:hover
+        transform: translateY(-5px)
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2)
+
+      .continent-image-container
+        img
+          max-width: 100%
+          border-radius: 8px
+
+      .continent-info-container
+        margin-top: 10px
+        flex-grow: 1
+
+        .continent-title
+          font-size: 1.5rem
+          margin-bottom: 10px
+          font-weight: bold
+
+        .continent-description
+          color: #666
+          text-align: justify
+        
+        .truncateText
+          text-decoration: none
+          color: #1E2146
+          &:hover
+            font-weight: bold
+
+      .tags-container
+        display: flex
+        justify-content: center
+        margin-top: 10px
+        padding-top: 10px
+        border-top: 1px solid #eee
+
+        .tags
+          display: flex
+          flex-wrap: wrap
+          gap: 5px
+
+        .tag
+          background: #7dffb3
+          border-radius: 4px
+          padding: 5px 10px
+          font-size: 0.9rem
+          color: #333
+          &:hover
+            background: darken(#39db9a, 10%)
+            cursor:pointer
+
+
+  @media (max-width: 1024px)
+    .continent-article-banner
+      padding: 30px 20px
+      height: auto
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+
+      h1, h2
+        font-size: 2rem 
+
+      p
+        font-size: 1rem 
+
+  @media (max-width: 768px)
+    .continent-article-banner
+      padding: 30px 20px
+      height: auto
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+
+      h1, h2
+        font-size: 1.5rem 
+
+      p
+        font-size: 0.9rem 
