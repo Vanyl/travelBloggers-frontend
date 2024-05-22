@@ -8,6 +8,22 @@ const EditArticle = ({ accessToken }) => {
     const [countryOptions, setCountryOptions] = useState([]);
     const [categoryOptions, setCategoryOptions] = useState([]);
     const mainPictureRef = useRef(null);
+    const articleId = 10;
+
+    //retrieve article values
+    useEffect(() => {
+        fetch(`https://travel-blogger-46c930280c07.herokuapp.com/api/show-article/${articleId}`)
+            .then(response => response.json())
+            .then(article => {
+                setValue('title', article.title);
+                setValue('content', article.content);
+                setValue('country', { value: article.country, label: article.country });
+                //setValue('categories', article.categories.map(cat => ({ value: cat.id, label: cat.name })));
+            })
+            .catch(error => {
+                console.error('Error fetching article data:', error);
+            });
+    }, [articleId, setValue]);
 
     // Retrieve categories
     useEffect(() => {
@@ -79,13 +95,12 @@ const EditArticle = ({ accessToken }) => {
                 content: data.content,
                 country: data.country.value,
                 continent: data.country.continent,
-                
             };
         }
 
         console.log('before try : ' + formData)
 
-        const id = 10;
+        
 
         formData.append('_method', 'PATCH');
 
@@ -95,7 +110,7 @@ const EditArticle = ({ accessToken }) => {
         }
 
         try {
-            const response = await fetch(`https://travel-blogger-46c930280c07.herokuapp.com/api/${id}/update-article`, {
+            const response = await fetch(`https://travel-blogger-46c930280c07.herokuapp.com/api/${articleId}/update-article`, {
                 method: 'POST', // Use POST for FormData with '_method' field
                 body: isFileChanged ? formData : JSON.stringify(jsonPayload), // Attach the FormData object
                 headers: {
@@ -118,7 +133,7 @@ const EditArticle = ({ accessToken }) => {
 
     return (
         <form className="form-edit-article" encType="multipart/form-data" onSubmit={handleSubmit(editArticle)}>
-            <input {...register('title', { maxLength: 20 })} name='title' placeholder="title" />
+            <input {...register('title', { maxLength: 20 })} name='title' placeholder="title" defaultValue={getValues('title')} />
 
             <textarea {...register('content', {
                 maxLength: {
@@ -129,6 +144,7 @@ const EditArticle = ({ accessToken }) => {
                 placeholder="content"
                 name='content'
                 rows={10}
+                defaultValue={getValues('content')}
             />
 
             <Select
@@ -171,7 +187,7 @@ const EditArticle = ({ accessToken }) => {
                     {...register('images')}
                 />
             </div>
-            <input className='form-edit-article-button' type="submit" />
+            <input className='form-edit-article-button' type="submit"  placeholder="test" />
         </form>
     )
 }
