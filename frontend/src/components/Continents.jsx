@@ -17,7 +17,7 @@ const Continents = () => {
       {
         svg: <EuropeSVG />,
         name: 'Europe',
-        link: '/europe',
+        link: '/continent-result',
       },
       {
         svg: <AfricaSVG />,
