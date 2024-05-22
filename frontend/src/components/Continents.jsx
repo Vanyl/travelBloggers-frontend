@@ -17,32 +17,32 @@ const Continents = () => {
       {
         svg: <EuropeSVG />,
         name: 'Europe',
-        link: '/continent-result',
+        link: '/continent/Europe',
       },
       {
         svg: <AfricaSVG />,
         name: 'Africa',
-        link: '/africa',
+        link: '/continent/Africa',
       },
       {
         svg: <AsiaSVG />,
         name: 'Asia',
-        link: '/asia',
+        link: '/continent/Asia',
       },
       {
         svg: <OceaniaSVG />,
         name: 'Oceania',
-        link: '/oceania',
+        link: '/continent/Oceania',
       },
       {
         svg: <SouthAmericaSVG />,
         name: 'South America',
-        link: '/southamerica',
+        link: '/continent/South%20America',
       },
       {
         svg: <NorthAmericaSVG />,
         name: 'North America',
-        link: '/northamerica',
+        link: '/continent/North%20America',
       },
     ];
   

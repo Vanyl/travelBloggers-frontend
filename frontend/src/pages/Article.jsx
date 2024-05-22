@@ -37,7 +37,6 @@ const Article = ({userData}) => {
     
         fetchData(); // Call the fetchData function
     
-        // Note: You can remove the catch block if you're not handling specific errors here
     }, []);
 
    

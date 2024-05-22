@@ -72,7 +72,7 @@ function AppRouter() {
             <Route path="my-account-edit-article/:articleId" element = {<EditArticle accessToken={accessToken} />} />
           </>
           )}
-          <Route path="/continent-result" element={<ContinentResult />} />
+          <Route path="/continent/:continent" element={<ContinentResult />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
     </BrowserRouter>
