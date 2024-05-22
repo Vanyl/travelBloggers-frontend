@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../sass/profile.sass';
 import { FaCog, FaPlus } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = ({ userData }) => {
   const [activeTab, setActiveTab] = useState('posts');
