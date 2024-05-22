@@ -62,7 +62,7 @@ function AppRouter() {
         <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="article" element={<Article userData={userData} />} />
+        <Route path="article/:articleId" element={<Article userData={userData} />} />
         {isLoggedIn && (
           <>
             <Route path="/my-account" element={<Profile userData={userData} />} />
