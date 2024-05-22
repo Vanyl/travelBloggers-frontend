@@ -102,17 +102,22 @@
             padding: 10px
             position: relative
 
+            .btn-articles
+                display: flex
+                align-items: center
+                justify-content: center
+
             .edit-button
-                position: absolute
-                top: 0
-                right: 0
-                background-color: transparent
+                padding: 5px 10px
+                border-radius: 5px
+                background-color: #39db9a
                 border: none
                 cursor: pointer
-                color: #555 
-
+                color: white
+                text-decoration: none
+                transition: background
                 &:hover
-                    color: #777 
+                    background-color: darken(#39db9a, 10%)
 
             img
                 width: 100%
