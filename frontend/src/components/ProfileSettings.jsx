@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../sass/profile-settings.sass';
 import { FaCog } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
