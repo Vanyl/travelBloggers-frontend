@@ -43,14 +43,20 @@ const Posts = () => {
                             <img className='avatar-img' src={post.user.avatar || 'placeholder.jpg'} alt="avatar" />
                         </div>
                         <p className='user'>{post.user.name}</p>
-                        <div className='tags'>
-                            {post.categories && post.categories.length > 0 ? (
-                                post.categories.map(category => (
-                                    <span key={category.id} className='tag'>{category.name}</span>
-                                ))
-                            ) : (
+                        <div className="tags-container">
+                            <div className='tags'>
+                                {post.categories && post.categories.length > 0 ? (
+                                    post.categories.map(category => (
+                                        <span key={category.id} className='tag'>{category.name}</span>
+                                    ))
+                                ) : (
+                                    null
+                                )}
                                 <span className='tag'>{post.continent}</span>
-                            )}
+                                <span className='tag'>{post.country}</span>
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
