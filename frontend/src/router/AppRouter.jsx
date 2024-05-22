@@ -12,6 +12,7 @@ import ProfileSettings from "../components/ProfileSettings";
 import AddArticle from "../components/AddArticle";
 import ContinentEurope from "../components/ContinentEurope";
 import EditArticle from "../components/EditArticle";
+import ContinentResult from "../components/ContinentResult";
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -71,7 +72,7 @@ function AppRouter() {
             <Route path="my-account-edit-article/:articleId" element = {<EditArticle accessToken={accessToken} />} />
           </>
           )}
-          <Route path="/europe" element={<ContinentEurope />} />
+          <Route path="/continent/:continent" element={<ContinentResult />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
     </BrowserRouter>
