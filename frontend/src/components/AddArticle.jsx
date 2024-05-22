@@ -2,6 +2,7 @@ import '../sass/addArticle.sass'
 import { useState, useEffect, useRef } from 'react';
 import Select from 'react-select';
 import { useForm } from "react-hook-form"
+import { useNavigate } from 'react-router-dom';
 
 const AddArticle = ({accessToken}) => {
     const { register, handleSubmit, setValue, getValues, watch, formState: { errors } } = useForm();
@@ -15,6 +16,8 @@ const AddArticle = ({accessToken}) => {
 
     const mainPictureRef = useRef(null);
     const imagesRef = useRef([]);
+
+    const navigate = useNavigate();
 
     //retrieve categories
     useEffect(() => {
@@ -91,6 +94,8 @@ const AddArticle = ({accessToken}) => {
 
             if (response.ok) {
                 console.log(result.message)
+                navigate("/my-account");
+                window.location.reload();
             } else {
                 alert('Error uploading article: ' + result.message);
             }
