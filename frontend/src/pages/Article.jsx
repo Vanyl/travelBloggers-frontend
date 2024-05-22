@@ -17,7 +17,8 @@ const Article = ({userData}) => {
         const fetchData = async () => {
             try {
                 console.log('coucou')
-                const response = await fetch(' https://travel-blogger-46c930280c07.herokuapp.com/api/show-article/10');
+                const response = await fetch(' https://travel-blogger-46c930280c07.herokuapp.com/api/show-article/38');
+              
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data);
