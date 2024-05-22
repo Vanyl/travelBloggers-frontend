@@ -93,8 +93,8 @@ const ProfileSettings = ({ userData, accessToken }) => {
 
       if (response.ok) {
         console.log('Account deleted successfully');
-        navigate('/'); // Redirige vers la page d'accueil après suppression du compte
-        window.location.reload(); // Rafraîchit la page
+        navigate('/');
+        window.location.reload(); 
 
       } else {
         console.error('Failed to delete account:', response.statusText);
@@ -106,6 +106,10 @@ const ProfileSettings = ({ userData, accessToken }) => {
 
   const handleDeleteArticle = (articleId) => {
     // Logique pour supprimer un article
+  };
+
+  const handleEditArticle = (articleId) => {
+    navigate(`/my-account-edit-article/${articleId}`);
   };
 
   const handleButtonClick = () => {
@@ -151,7 +155,7 @@ const ProfileSettings = ({ userData, accessToken }) => {
             <img src={article.image_url} alt={`Article ${article.id}`} />
             <h3>{article.title}</h3>
             <div className='btn-articles'>
-              <button className="edit-button"><Link to="/my-account-edit-article" className="edit-button">Edit</Link></button>
+              <button className="edit-button"  onClick={() => handleEditArticle(article.id)}>Edit</button>
               <button className="delete-button" onClick={() => handleDeleteArticle(article.id)}>Delete</button>
             </div>
           </div>
