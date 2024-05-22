@@ -4,8 +4,8 @@ import { FaCog } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-const ProfileSettings = ({ userData }) => {
-  const [username, setUsername] = useState('');
+const ProfileSettings = ({ userData, accessToken }) => {
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [newProfilePicture, setNewProfilePicture] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ const ProfileSettings = ({ userData }) => {
   useEffect(() => {
     if (userData) {
       console.log("userData in useEffect:", userData);
-      setUsername(userData.name);
+      setName(userData.name);
       setDescription(userData.description || '');
       setLoading(false);
     } else {
@@ -22,8 +22,8 @@ const ProfileSettings = ({ userData }) => {
     }
   }, [userData]);
 
-  const handleChangeUsername = (e) => {
-    setUsername(e.target.value);
+  const handleChangeName = (e) => {
+    setName(e.target.value);
   };
 
   const handleChangeDescription = (e) => {
@@ -35,8 +35,31 @@ const ProfileSettings = ({ userData }) => {
   };
 
   const handleSaveChanges = async () => {
-    // Logique pour enregistrer les modifications
+    try {
+      const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/edit-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          description: description,
+          _method: 'PATCH',
+        }),
+      });
+  
+      if (response.ok) {
+        console.log('Profile updated successfully');
+        window.location.reload(); // Recharge la page après avoir enregistré les modifications
+      } else {
+        console.error('Failed to update profile:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
+  
 
   const handleDeleteAccount = () => {
     // Logique pour supprimer le compte
@@ -62,7 +85,7 @@ const ProfileSettings = ({ userData }) => {
         <button className="green-button" onClick={() => console.log('Change profile picture')}>Change</button>
       </div>
       <div className="profile-details">
-        <input type="text" value={username} onChange={handleChangeUsername} />
+        <input type="text" value={name} onChange={handleChangeName} />
         <textarea
           value={description}
           onChange={handleChangeDescription}

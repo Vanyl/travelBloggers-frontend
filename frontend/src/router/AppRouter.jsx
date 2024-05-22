@@ -66,7 +66,7 @@ function AppRouter() {
         {isLoggedIn && (
           <>
             <Route path="/my-account" element={<Profile userData={userData} />} />
-            <Route path="my-account-settings" element = {<ProfileSettings userData={userData} />} />
+            <Route path="/my-account-settings" element={<ProfileSettings userData={userData} accessToken={accessToken} />} />
             <Route path="my-account-add-article" element = {<AddArticle accessToken={accessToken} />} />
             <Route path="my-account-edit-article" element = {<EditArticle accessToken={accessToken} />} />
           </>
