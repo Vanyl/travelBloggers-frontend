@@ -23,6 +23,7 @@ const Article = ({ userData }) => {
           const data = await response.json();
           setData(data);
           setComments(data.comments); // Assuming comments are directly available in the API response
+          console.log("Comments after fetching:", data.comments); // Add this line
         } else {
           console.error('Error fetching article data:', response.statusText);
         }
@@ -94,6 +95,14 @@ const Article = ({ userData }) => {
     return `${day}/${month}/${year}`;
   };
 
+
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', options);
+};
+
+
   return (
     <div className="container">
       <header className="post-hero-header">
@@ -139,25 +148,20 @@ const Article = ({ userData }) => {
       <section className="comment-section">
         <span className="comments-number">{comments.length} comments</span>
         <div className="comments-area">
-        {comments.map((comment, index) => (
-        <div className="comments-area" key={index}>
-            {/* Vérifiez d'abord si l'utilisateur et son avatar existent */}
-            {comment.user && comment.user.avatar && (
-            <img src={comment.user.avatar} alt="" className="avatar" />
-            )}
-            <div className="comment-content">
-            {/* Affichez le nom de l'utilisateur s'il existe */}
-            <span className="comment-user">{comment.user && comment.user.name}</span>
-            {/* Affichez la date de création du commentaire */}
-            <time dateTime="" className="comment-time">{comment.created_at}</time>
-            {/* Affichez le contenu du commentaire */}
-            <p className="comment-text">{comment.content}</p>
-            </div>
+  {comments.map((comment, index) => (
+    <div className="comment" key={index}>
+      <div className="comment-content">
+        <div className="comment-info">
+          <span className="comment-user">{comment.comment.user && comment.comment.user.name}</span>
         </div>
-        ))}
+        <div className="comment-date">{formatDate(comment.comment.created_at)}</div>
+      </div>
+      <p className="comment-text">{comment.comment.content}</p>
+    </div>
+  ))}
+</div>
 
 
-        </div>
         <div className="comment-respond">
           <h3 className="comment-title">Leave a comment</h3>
 
