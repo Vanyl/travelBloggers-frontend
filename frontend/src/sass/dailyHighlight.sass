@@ -36,10 +36,10 @@
     box-sizing: border-box  
     margin-bottom: 40px
 
-  .polaroid
+  .daily-highlight-polaroid
     transform: rotate(-5deg)
-    flex: 1 0 25%  // Utilise 1/4 de l'espace disponible, ne rétrécit pas, ne grandit pas au-delà de 25%
-    max-width: 250px  // Maximum width set to 250px
+    flex: 1 0 25%  
+    max-width: 250px  
     aspect-ratio: 3 / 4
     background: white
     
@@ -48,12 +48,15 @@
     margin-right: 75px
     overflow: hidden
 
-  .photo
+  .daily-highlight-photo
     width: 100%
     height: 100%
     background-color: #1E2146
+    background-size: cover
+    background-position: center
+    object-fit: cover
 
-  .info
+  .daily-highlight-info
     flex: 3 1 75%  // Utilise 3/4 de l'espace disponible, peut s'agrandir
     text-align: left
 
@@ -63,11 +66,12 @@
       margin-bottom: 30px 
 
     
-    p
-      font-size: 1.3em
+    .daily-highlight-description
+      font-size: 1em
       text-align: justify
       margin-top: 0 
       line-height: 1.5
+      color: #313638
 
 
     .discover-btn
@@ -80,3 +84,20 @@
       font-size: 1em
       margin-top: 15px
       border-radius: 5px
+
+
+
+@media (max-width: 768px)
+  .content 
+    flex-direction: column
+    align-items: center
+  
+
+  .daily-highlight-polaroid 
+    margin-right: 0
+    margin-bottom: 20px
+    width: 80%
+    max-width: none
+    aspect-ratio: unset
+    transform: none
+    margin: 30px 0
