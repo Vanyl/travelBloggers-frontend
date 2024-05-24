@@ -4,12 +4,17 @@
   background-color: #e4e9ec
   font-family: 'Roboto', sans-serif
 
-
 h2
   color: #1E2146
   margin-bottom: 15px
   font-size: 2.2em  
-  font-weight: 600  
+  font-weight: 600 
+
+.title-popular-countries
+  color: #1E2146
+  margin-bottom: 15px
+  font-size: 2.2em  
+  font-weight: 600 
 
 h4
   color: #39db9a
@@ -18,13 +23,13 @@ h4
 
 h5
   color: #7f8c8d  
-  font-size: 1.5em  // Taille normale pour la lecture facile
+  font-size: 1.5em
   margin-top: 0
-  margin-bottom: 10px  // Espacement avant de commencer le contenu suivant
+  margin-bottom: 10px
   font-weight: normal
-  line-height: 1.6  // Augmente la hauteur de ligne pour une meilleure lisibilité
-  max-width: 60%  // Contrôle la largeur pour une meilleure présentation du texte
-  margin-left: auto  // Centrage du texte descriptif
+  line-height: 1.6
+  max-width: 60%
+  margin-left: auto
   margin-right: auto
 
 .countries-grid
@@ -38,28 +43,24 @@ h5
   width: 200px
   margin: 25px
   transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1), background-color 0.5s ease
+  text-decoration: none 
+  color: inherit 
+
+  &:hover
+    transform: translateY(-20px)
 
 .polaroid
+  width: 190px
+  height: 320px
   background: white
   padding: 10px
   box-shadow: 0 4px 8px rgba(0,0,0,0.2)
   text-align: center
   position: relative
   overflow: hidden
-  border-radius: 2px  // Coins légèrement arrondis pour un look doux
+  border-radius: 2px
   &:hover
-    transform: translateY(-20px)
-    &:after
-      content: ""
-      position: absolute
-      top: 0
-      left: 0
-      right: 0
-      bottom: 0
-      background-color: rgba(57, 219, 154, 0.2)
-      opacity: 0
-      transition: opacity 0.5s ease
-      opacity: 1
+    background-color: rgba(57, 219, 154, 0.4) // Couleur verte au survol
 
 .photo
   width: 100%
@@ -70,16 +71,11 @@ h5
   justify-content: center
   color: white
   font-size: 20px
+  background-size: cover
+  background-position: center
 
 .caption
   color: #33C58B
   font-weight: bold
   margin-top: 15px
-
-.discover
-  display: block
-  color: #39db9a
-  text-decoration: none
-  font-weight: bold
-  margin-top: 5px
-  margin-bottom: 15px
+  position: relative
