@@ -73,7 +73,7 @@ const ProfileSettings = ({ userData, accessToken }) => {
 
       if (response.ok) {
         console.log('Profile updated successfully');
-        window.location.reload(); // Recharge la page après avoir enregistré les modifications
+        //window.location.reload(); // Recharge la page après avoir enregistré les modifications
       } else {
         console.error('Failed to update profile:', response.statusText);
       }
