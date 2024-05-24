@@ -4,7 +4,7 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/travelBloggers-frontend/frontend/',
+  base: '/travelBloggers-frontend/frontend',
   plugins: [
     react(),
     svgr()

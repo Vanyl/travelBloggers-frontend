@@ -55,7 +55,7 @@ function AppRouter() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/travelBloggers-frontend/frontend">
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="/" element={<Home />} />
