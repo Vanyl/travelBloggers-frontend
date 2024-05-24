@@ -8,10 +8,45 @@ const ContinentResult = () => {
     const [articles, setArticles] = useState([]);
     const [countries, setCountries] = useState([]);
     const [image, setImage] = useState([]);
+    const [description, setDescription] = useState('');
     const { continent } = useParams();
 
     const continentImage = continent
     const unplashURL = `https://api.unsplash.com/search/photos?page=1&query=${continentImage}&client_id=QamvDmYlvPU_cPDzXQb_zbyDZmBgNKc8wVZPVQi_16g`
+
+    const continentDescription = [
+        {
+            continent: 'Europe',
+            description: 'A continent of a thousand faces, where history blends with modernity, and breathtaking landscapes meet charming towns'
+        },
+        {
+            continent: 'Africa',
+            description: 'Experience a continent of diverse landscapes, where ancient traditions intertwine with modern innovation, and vibrant cultures paint the canvas of history.'
+        },
+        {
+            continent: 'Asia',
+            description: 'An enchanting continent of diversity, where ancient traditions harmonize with cutting-edge innovation, and majestic landscapes captivate the soul.'
+        },
+        {
+            continent: 'North America',
+            description: 'A continent of vast landscapes, diverse cultures, and boundless opportunities, where every corner tells a story and adventure awaits at every turn.'
+        },
+        {
+            continent: 'South America',
+            description: 'A continent where vibrant cultures, lush rainforests, and majestic peaks converge to create an unforgettable tapestry of beauty and diversity.'
+        },
+        {
+            continent: 'Oceania',
+            description: 'A realm of boundless beauty, where azure waters embrace golden shores, and vibrant cultures intertwine with awe-inspiring natural wonders.'
+        },
+    ]
+
+    useEffect(() => {
+        const descriptionObj = continentDescription.find(desc => desc.continent.toLowerCase() === continent.toLowerCase());
+        if (descriptionObj) {
+            setDescription(descriptionObj.description);
+        }
+    }, [continent, continentDescription]);
 
     //images
     useEffect(() => {
@@ -82,9 +117,7 @@ const ContinentResult = () => {
                         }}
                     >
                         <h1>{continent}</h1>
-                        <p>
-                            A continent where vibrant cultures, lush rainforests, and majestic peaks converge to create an unforgettable tapestry of beauty and diversity.
-                        </p>
+                        <p>{description}</p>
                     </div>
                 )}
                 <div className="filters">
