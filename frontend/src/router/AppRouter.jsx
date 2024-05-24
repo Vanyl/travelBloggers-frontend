@@ -10,7 +10,6 @@ import Article from "../pages/Article";
 import Profile from "../components/Profile";
 import ProfileSettings from "../components/ProfileSettings";
 import AddArticle from "../components/AddArticle";
-import ContinentEurope from "../components/ContinentEurope";
 import EditArticle from "../components/EditArticle";
 import ContinentResult from "../components/ContinentResult";
 
