@@ -1,12 +1,78 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import '../sass/dailyHighlight.sass';
+import { getCode } from 'country-list';
 
 function DailyHighlight() {
-    const country = {
-        name: "Iceland",
-        description: "Explore Iceland's dramatic landscapes with volcanoes, geysers, hot springs, and lava fields. Witness the majestic Northern Lights and take part in unique adventures in one of the world's most picturesque destinations.",
+    const [country, setCountry] = useState({
+        name: "",
+        description: "",
+        code: "",
         imageUrl: ""
-    };
+    });
+
+    useEffect(() => {
+        // Fetch a random country from the show-all API
+        fetch(`https://travel-blogger-46c930280c07.herokuapp.com/api/show-all`)
+            .then(response => response.json())
+            .then(async data => {
+                const randomArticle = data?.articles[Math.floor(Math.random() * data.articles.length)];
+                const countryName = randomArticle.country;
+                const countryCode = getCode(countryName);
+                const countryCodeLowerCase = countryCode.toLowerCase()
+                setCountry(prevState => ({ ...prevState, name: countryName, code: countryCodeLowerCase }));
+                console.log('country code :' + countryCodeLowerCase);
+
+                // Fetch the description from the Countrywise API using the country code
+                const url = `https://countrywise.p.rapidapi.com/?country=${countryCodeLowerCase}&fields=textual.culture`;
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Key': '896464cae7msh599472bab2ef2a6p12e120jsn135d886e1840', // Replace with your actual API key
+                        'X-RapidAPI-Host': 'countrywise.p.rapidapi.com'
+                    }
+                };
+                try {
+                    const response = await fetch(url, options);
+                    //const result = await response.text();
+                    const [{ textual }] = await response.json();
+                    const countryDescription = textual.culture
+                    setCountry(prevState => ({ ...prevState, description: countryDescription }));
+                    console.log(`${textual.culture}.`);
+                    //console.log(result);
+                } catch (error) {
+                    console.error(error);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching random country:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (country.name !== "") {
+            console.log('coucou')
+            const fetchImages = async () => {
+                try {
+                    const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=${country.name}&client_id=QamvDmYlvPU_cPDzXQb_zbyDZmBgNKc8wVZPVQi_16g`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.results.length > 0) {
+                            setCountry(prevState => ({ ...prevState, imageUrl: data.results[1].urls.full }));
+                        } else {
+                            console.error('No images found for:', country.name);
+                        }
+                    } else {
+                        console.error('Error fetching images:', response.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error fetching images:', error);
+                }
+            };
+
+            fetchImages();
+        }
+    }, [country.name]);
+
 
     return (
         <div className="daily-highlight">
@@ -14,14 +80,13 @@ function DailyHighlight() {
             <h2>Destination Of The Day</h2>
             <h5>Experience a new destination every day and uncover the best activities, sights, and secrets that await.</h5 >
             <div className="content">
-                <div className="polaroid">
-                    <div className="photo" style={{ backgroundColor: country.imageUrl ? `url(${country.imageUrl})` : '#1E2146' }}>
-                        {/* Future placement for the image */}
+                <div className="daily-highlight-polaroid">
+                    <div className="daily-highlight-photo" style={{ backgroundImage: country.imageUrl ? `url(${country.imageUrl})` : 'none' }}>
                     </div>
                 </div>
-                <div className="info">
+                <div className="daily-highlight-info">
                     <h4>{country.name}</h4>
-                    <p>{country.description}</p>
+                    <p className='daily-highlight-description'>{country.description}</p>
                     <button className="discover-btn">Discover {country.name}</button>
                 </div>
             </div>
