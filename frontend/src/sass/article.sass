@@ -107,6 +107,7 @@
 .comment-section
     max-width: 600px
     margin: 20px auto 0  // Ajout de la marge au-dessus
+    
 
     textarea
         height: 150px
@@ -120,10 +121,20 @@
         &:focus
             outline-color: #39db9a
 
+    .likes-comments-container
+        display: flex
+        align-items: center
+        justify-content: center
+
+    .likes-number,
+    .comments-number
+        margin-right: 20px
+
     .comments-number
         text-align: center
         display: table
-        margin: 0 auto
+        margin-left: 25px
+        
 
     .comments-area
         margin-top: 10px  // Ajout de la marge entre les éléments
@@ -181,6 +192,29 @@ hr
         .comment-text
             margin: 0
             color: #333
+
+.like-button 
+    position: fixed
+    right: 200px
+    bottom: 155px
+    width: 50px // définir la largeur
+    height: 50px // définir la hauteur pour la rendre égale à la largeur
+    background-color: #ff4757
+    color: #fff
+    border: none
+    border-radius: 50% // rendre le bouton rond
+    cursor: pointer
+    font-size: 16px
+    display: flex
+    align-items: center
+    justify-content: center
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+
+.like-button:disabled 
+    background-color: #ccc
+    cursor: not-allowed
+
+
 
 @media (max-width: 768px)
     .container
