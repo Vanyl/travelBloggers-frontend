@@ -94,12 +94,31 @@
       height: 100%
       object-fit: cover
 
-.tag
-  background-color: grey
-  border-radius: 8px
-  margin-top: 10px
-  padding: 0 5px
-  margin-right: 5px
+  .tags-container
+    display: flex
+    justify-content: center
+    margin-top: 10px
+    padding-top: 10px
+    border-top: 1px solid #eee
+
+    .tags
+      display: flex
+      flex-wrap: wrap
+      gap: 8px
+      //justify-content: center
+
+    .tag
+      background: #7dffb3
+      border-radius: 20px
+      padding: 6px 12px
+      font-size: 0.7rem
+      color: #333
+      transition: background-color 0.3s ease
+
+      &:hover
+        background: darken(#7dffb3, 20%) 
+        cursor: pointer
+
 
 @media (max-width: 768px)
   .posts-container
@@ -107,3 +126,10 @@
 
   .post-container
     flex-direction: column
+
+  .tags-container
+    .tags
+      gap: 6px 
+      .tag
+        font-size: 0.6rem 
+        padding: 5px 10px 
