@@ -1,29 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import '../sass/profile.sass';
 import { FaCog, FaPlus } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const Profile = ({ userData }) => {
+const Profile = ({ userData, accessToken }) => {
   const [activeTab, setActiveTab] = useState('posts');
+  const [favoriteArticles, setFavoriteArticles] = useState([]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
 
-  const handleSettingsButtonClick = () => {
-    // Logique des paramètres
+  const fetchFavoriteArticles = async () => {
+    try {
+      console.log('Fetching favorite articles...');
+      const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/my-favorites', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Favorite articles:', data.myLikes);
+        // Filtrer les doublons en utilisant un ensemble pour stocker les identifiants uniques
+        const uniqueFavoriteArticles = Array.from(new Set(data.myLikes.map(like => like.article.id)));
+        // Filtrer les articles aimés pour n'afficher qu'une seule fois chaque article
+        const uniqueFavoriteArticlesList = uniqueFavoriteArticles.map(articleId =>
+          data.myLikes.find(like => like.article.id === articleId)
+        );
+        setFavoriteArticles(uniqueFavoriteArticlesList);
+      } else {
+        console.error('Failed to fetch favorite articles:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching favorite articles:', error);
+    }
   };
 
-  const handleAddArticle = () => {
-    // Logique pour ajouter un nouvel article
-  };
+  useEffect(() => {
+    if (activeTab === 'favorites') {
+      fetchFavoriteArticles();
+    }
+  }, [activeTab, accessToken]);
 
-  // Vérification pour s'assurer que userData est défini
   if (!userData) {
     return <div>Loading...</div>;
   }
 
-  return (
+  return ( 
     <div className="profile-container">
       <div className="profile-info">
         <div className="profile-picture">
@@ -56,14 +81,20 @@ const Profile = ({ userData }) => {
       </div>
 
       <div className="feed-grid">
-        {userData.articles && userData.articles.map((article) => (
+        {activeTab === 'posts' && userData.articles && userData.articles.map((article) => (
           <div className="feed-item" key={article.id}>
             <img src={article.image_url} alt={`Article ${article.id}`} />
             <h3>{article.title}</h3>
           </div>
         ))}
+        {activeTab === 'favorites' && favoriteArticles.map((like) => (
+          <div className="feed-item" key={like.article.id}>
+            <img src={like.article.image_url} alt={`Article ${like.article.id}`} />
+            <h3>{like.article.title}</h3>
+          </div>
+        ))}
       </div>
-      <div className="add-article-button" onClick={handleAddArticle}>
+      <div className="add-article-button">
         <Link to="/my-account-add-article">
           <FaPlus />
         </Link>
