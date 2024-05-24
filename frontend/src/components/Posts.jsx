@@ -38,11 +38,7 @@ const Posts = () => {
                             <p className='hover-date'>{formatDate(post.created_at)}</p>
                         </div>
                     </div>
-                    <div className='info-container'>
-                        <div className='avatar'>
-                            <img className='avatar-img' src={post.user.avatar || 'placeholder.jpg'} alt="avatar" />
-                        </div>
-                        <p className='user'>{post.user.name}</p>
+                    <div className='info-container-article-home'>
                         <div className="tags-container">
                             <div className='tags'>
                                 {post.categories && post.categories.length > 0 ? (
@@ -54,9 +50,13 @@ const Posts = () => {
                                 )}
                                 <span className='tag'>{post.continent}</span>
                                 <span className='tag'>{post.country}</span>
-
-
                             </div>
+                        </div>
+                        <div className='user-info'>
+                            <div className='avatar'>
+                                <img className='avatar-img' src={post.user.avatar || 'placeholder.jpg'} alt="avatar" />
+                            </div>
+                            <p className='user'>{post.user.name}</p>
                         </div>
                     </div>
                 </div>
