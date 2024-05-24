@@ -84,7 +84,7 @@ const Profile = ({ userData, accessToken }) => {
         {activeTab === 'posts' && userData.articles && userData.articles.map((article) => (
           <div className="feed-item" key={article.id}>
             <img src={article.image_url} alt={`Article ${article.id}`} />
-            <h3>{article.title}</h3>
+            <Link className='settings-article-link' to={`/article/${article.id}`}><h3>{article.title}</h3></Link>
           </div>
         ))}
         {activeTab === 'favorites' && favoriteArticles.map((like) => (
