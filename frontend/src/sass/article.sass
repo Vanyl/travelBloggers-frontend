@@ -104,57 +104,83 @@
             grid-row: 1 / span 2
             height: 100%
 
-    .comment-section
-        max-width: 600px
-        margin: auto
+.comment-section
+    max-width: 600px
+    margin: 20px auto 0  // Ajout de la marge au-dessus
 
-        textarea
-            height: 150px
-            min-height: 150px
-            max-height: 200px
-            width: 100%
-            min-width: 100%
-            max-width: 100%
-            margin-bottom: 15px
+    textarea
+        height: 150px
+        min-height: 150px
+        max-height: 200px
+        width: 100%
+        min-width: 100%
+        max-width: 100%
+        margin-bottom: 15px
 
-            &:focus
-                outline-color: #39db9a
+        &:focus
+            outline-color: #39db9a
 
-        .comments-number
+    .comments-number
+        text-align: center
+        display: table
+        margin: 0 auto
+
+    .comments-area
+        margin-top: 10px  // Ajout de la marge entre les éléments
+
+    .comment-row
+        display: flex
+        gap: 15px
+
+        input
             text-align: center
-            display: table
-            margin: 0 auto
 
-        .comment-row
-            display: flex
-            gap: 15px
+    .btn-comment
+        font-family: "Roboto", sans-serif
+        text-transform: uppercase
+        outline: 0
+        background: #39db9a
+        width: 100%
+        border: 1px solid #39db9a
+        border-radius: 5px
+        padding: 15px
+        color: white
+        font-size: 14px
+        transition: background 0.3s ease, color 0.3s ease
+        cursor: pointer
 
-            input
-                text-align: center
+    .btn-comment:hover, .btn-comment:active, .btn-comment:focus
+        background: darken(#39db9a, 10%) 
 
-        .btn-comment
-            font-family: "Roboto", sans-serif
-            text-transform: uppercase
-            outline: 0
-            background: #39db9a
-            width: 100%
-            border: 1px solid #39db9a
-            border-radius: 5px
-            padding: 15px
-            color: white
-            font-size: 14px
-            transition: background 0.3s ease, color 0.3s ease
-            cursor: pointer
+hr 
+    margin: 55px auto 25px
+    border: 0
+    height: 0
+    border-top: 1px solid rgba(0, 0, 0, 0.2)
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3)
 
-        .btn-comment:hover, .btn-comment:active, .btn-comment:focus
-            background: darken(#39db9a, 10%) 
+.comment
+    margin-bottom: 5px
+    padding: 10px
+    background-color: #f2f2f2
+    border-radius: 5px
 
-    hr 
-        margin: 55px auto 25px
-        border: 0
-        height: 0
-        border-top: 1px solid rgba(0, 0, 0, 0.2)
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3)
+    .comment-content
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+        .comment-user
+            font-weight: bold
+            margin-bottom: 5px
+
+        .comment-date
+            font-size: 0.8em
+            color: gray
+
+        .comment-text
+            margin: 0
+            color: #333
 
 @media (max-width: 768px)
     .container
@@ -169,17 +195,16 @@
                     grid-column: auto
                     grid-row: auto
 
-        .comments-area,
-        .comment-respond
-            margin: 0 20px
+    .comment-section,
+    .comment-respond
+        margin: 0 20px
 
-        .comment-respond input 
-            padding: 15px
+    .comment-respond input 
+        padding: 15px
 
-        .comment-row
-            flex-direction: column
-            align-items: center
+    .comment-row
+        flex-direction: column
+        align-items: center
 
-        .comment-section .btn-comment
-            width: 50%
-
+    .comment-section .btn-comment
+        width: 50%
