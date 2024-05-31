@@ -12,6 +12,9 @@ import ProfileSettings from "../components/ProfileSettings";
 import AddArticle from "../components/AddArticle";
 import EditArticle from "../components/EditArticle";
 import ContinentResult from "../components/ContinentResult";
+import CountryResult from "../components/CountryResult";
+import ScrollToTop from '../components/ScrollToTop'
+
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -57,6 +60,7 @@ function AppRouter() {
   return (
     <HashRouter>
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/authentication" element={<Authentication setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
@@ -72,6 +76,7 @@ function AppRouter() {
           </>
           )}
           <Route path="/continent/:continent" element={<ContinentResult />} />
+          <Route path="/country/:country" element={<CountryResult />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
     </HashRouter>

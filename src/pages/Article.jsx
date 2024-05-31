@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import '../sass/article.sass';
 import ImageComponent from '../components/ImageComponent';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import SubFooter from "../components/SubFooter";
 import { FaHeart } from 'react-icons/fa';
 
@@ -194,8 +194,8 @@ const Article = ({ userData }) => {
                           {data?.article.categories.map((category, index) => (
                               <a href="#" key={index}><span className="post-tag-header">{category.name}</span></a>
                           ))}
-                          <a href="#"><span className="post-tag-header">{data?.article.continent}</span></a>
-                          <a href="#"><span className="post-tag-header">{data?.article.country}</span></a>
+                        <Link className="post-tag-header" to={`/continent/${data?.article.continent}`}><span className="post-tag-header">{data?.article.continent}</span> </Link>
+                        <Link className="post-tag-header" to={`/country/${data?.article.country}`}><span className="post-tag-header">{data?.article.country}</span></Link>
                       </div>
                       <h1 className="post-title-header">{data?.article.title}</h1>
                       <div className="post-user-header post-date-header">
