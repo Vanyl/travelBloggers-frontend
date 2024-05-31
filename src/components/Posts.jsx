@@ -33,10 +33,12 @@ const Posts = () => {
                 <div key={post.id} className='post-container'>
                     <div className="image-container">
                         <img className="post-img" src={post.image_url} alt="post" />
-                        <div className='hover-info'>
-                            <Link className='hover-title' to={`/article/${post.id}`}><p>{post.title}</p></Link>
-                            <p className='hover-date'>{formatDate(post.created_at)}</p>
-                        </div>
+                        <Link className='hover-title' to={`/article/${post.id}`}>
+                            <div className='hover-info'>
+                                <p className='hover-title'>{post.title}</p>
+                                <p className='hover-date'>{formatDate(post.created_at)}</p>
+                            </div>
+                        </Link>
                     </div>
                     <div className='info-container-article-home'>
                         <div className="tags-container">
