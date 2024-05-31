@@ -144,8 +144,6 @@ const ContinentResult = () => {
                                         )}
                                         <span className='tag'>{article.continent}</span>
                                         <span className='tag'>{article.country}</span>
-
-
                                     </div>
                                 </div>
                             </div>

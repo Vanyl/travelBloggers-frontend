@@ -50,8 +50,12 @@ const Posts = () => {
                                 ) : (
                                     null
                                 )}
-                                <span className='tag'>{post.continent}</span>
-                                <span className='tag'>{post.country}</span>
+                                <span className='tag'><Link className='tag-link' to={`/continent/${post.continent}`}>
+                                    {post.continent}
+                                </Link></span>
+                                <span className='tag'><Link className='tag-link' to={`/country/${post.country}`}>
+                                    {post.country}
+                                </Link></span> 
                             </div>
                         </div>
                         <div className='user-info'>

@@ -1,0 +1,60 @@
+@font-face 
+    font-family: 'Camellia'
+    src: url('../assets/fonts/Camellia.ttf') format('truetype')
+    font-weight: normal
+    font-style: normal
+
+.about-hero
+  height: 80vh
+  background-image: url('/src/assets/images/spain-topbanner.jpg')
+  background-size: cover
+  background-position: center-bottom
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  text-align: center
+  color: white
+
+  h2
+    font-family: 'Camellia'
+
+.travel-citation 
+    font-size: 18px
+    font-style: italic
+    color: #1E2146
+    //text-align: center
+    margin-top: 20px
+
+.travel-citation-author 
+    display: block
+    font-style: normal
+    color: #666
+    text-align: right
+
+
+.about-container
+  width: 50%
+  padding: 4% 0 0
+  margin: auto
+
+  p
+    text-align: justify
+    margin: 50px 0
+    color: #1E2146
+
+  p span
+    font-weight: bold
+    font-family: "Camellia"
+
+h2
+  text-align: center
+  color: white
+
+
+@media (max-width: 768px)
+  .travel-citation, .travel-citation-author
+      color: white
+    
+  .travel-citation-author
+    margin-right: 15px
