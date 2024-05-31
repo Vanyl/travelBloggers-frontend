@@ -20,7 +20,6 @@ function DailyHighlight() {
                 const countryCode = getCode(countryName);
                 const countryCodeLowerCase = countryCode.toLowerCase()
                 setCountry(prevState => ({ ...prevState, name: countryName, code: countryCodeLowerCase }));
-                console.log('country code :' + countryCodeLowerCase);
 
                 // Fetch the description from the Countrywise API using the country code
                 const url = `https://countrywise.p.rapidapi.com/?country=${countryCodeLowerCase}&fields=textual.culture`;
@@ -37,8 +36,6 @@ function DailyHighlight() {
                     const [{ textual }] = await response.json();
                     const countryDescription = textual.culture
                     setCountry(prevState => ({ ...prevState, description: countryDescription }));
-                    console.log(`${textual.culture}.`);
-                    //console.log(result);
                 } catch (error) {
                     console.error(error);
                 }
@@ -50,7 +47,6 @@ function DailyHighlight() {
 
     useEffect(() => {
         if (country.name !== "") {
-            console.log('coucou')
             const fetchImages = async () => {
                 try {
                     const response = await fetch(`https://api.unsplash.com/search/photos?page=1&query=${country.name}&client_id=QamvDmYlvPU_cPDzXQb_zbyDZmBgNKc8wVZPVQi_16g`);
