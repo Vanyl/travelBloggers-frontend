@@ -42,7 +42,8 @@ const Authentication = ({ isLoggedIn, setIsLoggedIn }) => {
         }
     }, [isLoggedIn]); // Déclenchez cette fonction à chaque fois que isLoggedIn change
 
-    const toggleLogin = () => {
+    const toggleLogin = (event) => {
+        event.preventDefault()
         setIsSignUp(!isSignUp);
         setError(null) //clear error
     };
