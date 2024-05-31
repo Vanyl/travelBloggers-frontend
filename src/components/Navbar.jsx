@@ -3,9 +3,11 @@ import { FaSearch } from "react-icons/fa";
 import '../sass/navbar.sass';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { RxHamburgerMenu } from "react-icons/rx";
 
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -17,14 +19,11 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       });
 
       if (response.ok) {
-        // remove token from local storage
         localStorage.removeItem('accessToken');
-        console.log("log out ok")
+        console.log("log out ok");
         setIsLoggedIn(false);
-        // Redirect to the home page
         navigate('/');
       } else {
-      
         console.error('Error logging out:', response.statusText);
       }
     } catch (error) {
@@ -49,8 +48,8 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <Link to="/" className="navbar-logo">Travel Bloggers</Link>   
-      <div className="navbar-links">
+      <Link to="/" className="navbar-logo">Travel Bloggers</Link>
+      <div className={`navbar-links ${showMobileMenu ? 'mobile-menu-open' : ''}`}>
         <Link to="/about" className="link">About</Link>
         <Link to="/contact" className="link">Contact</Link>
         <div className="right-links">
@@ -62,11 +61,14 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
           ) : (
             <>
               <Link to="/authentication" className="link" onClick={() => console.log('Login Soon')}>Login</Link>
-              {/* <Link to="/authentication" className="link" onClick={() => console.log('Sign Up Soon')}>Sign Up</Link> */}
             </>
           )}
           <FaSearch className="link search-icon" />
         </div>
+      </div>
+
+      <div className="hamburger-icon" onClick={() => setShowMobileMenu(!showMobileMenu)}>
+        <RxHamburgerMenu />
       </div>
     </nav>
   );
