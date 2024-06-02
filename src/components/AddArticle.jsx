@@ -109,6 +109,7 @@ const AddArticle = ({accessToken}) => {
     return (
         <>
             <form className="form-add-article" encType="multipart/form-data" onSubmit={handleSubmit(submitArticle)}>
+                <h1>Add article</h1>
                 <input {...register('title', { required: true, maxLength: 30 })} name='title' placeholder="title" />
                 {errors.title && <p>Title is required.</p>}
 

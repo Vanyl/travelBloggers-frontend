@@ -143,8 +143,8 @@ const EditArticle = ({ accessToken }) => {
 
     return (
         <form className="form-edit-article" encType="multipart/form-data" onSubmit={handleSubmit(editArticle)}>
-            <input {...register('title', 
-            { maxLength: 20 })} 
+            <h1>Edit my article</h1>
+            <input {...register('title')} 
             name='title' 
             placeholder="title" 
             defaultValue={watch('title')}
