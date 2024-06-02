@@ -195,8 +195,8 @@ hr
 
 .like-button 
     position: fixed
-    right: 200px
-    bottom: 155px
+    right: 180px
+    bottom: 50px
     width: 50px // définir la largeur
     height: 50px // définir la hauteur pour la rendre égale à la largeur
     background-color: #ff4757
@@ -213,6 +213,14 @@ hr
 .like-button:disabled 
     background-color: #ccc
     cursor: not-allowed
+
+@media (max-width: 375px)
+    .container .post-hero-header
+        margin-top: 75px
+
+    .like-button 
+        right: 160px
+        bottom: 35px
 
 
 
