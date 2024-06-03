@@ -13,8 +13,8 @@ If the user logs, he can comment/likes posts, publish/edit/delete posts. The use
 - API : [unplash](https://unsplash.com/) for the pictures not user related, [countrywise](https://countrywise.io/) for the culture text in the highlight section and [restcountries](https://restcountries.com/v3.1/all) to select the country when you add/edit a post.
 
 ### Installation
-npm install
-npm run dev
+- npm install
+- npm run dev
 
 ### Features to add
 - Search feature home page and navbar
