@@ -1,13 +1,14 @@
-import React from 'react';
-import { FaSearch } from "react-icons/fa";
-import '../sass/navbar.sass';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, useNavigate } from 'react-router-dom';
-import { RxHamburgerMenu } from "react-icons/rx";
+import '../sass/navbar.sass';
 
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -20,7 +21,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
 
       if (response.ok) {
         localStorage.removeItem('accessToken');
-        console.log("log out ok");
+        console.log('Logout successful');
         setIsLoggedIn(false);
         navigate('/');
       } else {
@@ -30,8 +31,6 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       console.error('Error logging out:', error);
     }
   };
-
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,7 +62,15 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
               <Link to="/authentication" className="link" onClick={() => console.log('Login Soon')}>Login</Link>
             </>
           )}
-          <FaSearch className="link search-icon" />
+                    <div className={`search-container ${showSearch ? 'open' : ''}`}>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search..."
+              style={{ width: showSearch ? '200px' : '0', opacity: showSearch ? '1' : '0' }}
+            />
+            <FaSearch className="link search-icon" onClick={() => setShowSearch(!showSearch)} />
+          </div>
         </div>
       </div>
 
@@ -75,3 +82,4 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
 }
 
 export default Navbar;
+
