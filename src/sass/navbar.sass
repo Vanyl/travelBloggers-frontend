@@ -81,7 +81,7 @@
       cursor: pointer
       margin-right: 50px
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
-      background-color: transparent // Rend le fond transparent
+      background-color: transparent 
       border: none
       background-size: 0% 100%
       background-repeat: no-repeat
@@ -91,7 +91,6 @@
       &:hover
         background-size: calc(100% - 11px) 100%
         cursor: pointer
-        // Utilisation de la couleur de fond pour l'effet de soulignement
         background-image: linear-gradient(to bottom, transparent 65%, #39db9a 0)
         background-position: 5px 100%
 
@@ -102,6 +101,26 @@
     border: none
     top: 20px
     left: 20px
+
+  .search-container
+    display: flex
+    align-items: center
+    position: relative
+    transition: width 0.3s ease-in-out
+
+    .search-input
+      border: none
+      outline: none
+      padding: 5px
+      font-size: 16px
+      width: 0
+      opacity: 0
+      transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out
+      border-radius: 5px
+
+    &.open .search-input
+      width: 200px
+      opacity: 1
 
   @media (max-width: 768px) 
     .hamburger-icon 
@@ -130,5 +149,5 @@
       &.mobile-menu-open
         display: flex
 
-
-
+    .search-container.open ~ .right-links
+      margin-right: 210px
