@@ -1,6 +1,6 @@
 # Travel Bloggers 
 > Take a look at [Travel Bloggers](https://vanyl.github.io/travelBloggers-frontend/)
-> And [here](https://github.com/Myriiam/backend-blog-travel/)'s the back-end
+> and [here](https://github.com/Myriiam/backend-blog-travel/)'s the back-end
 
 ## About
 Travel Bloggers is a blog application where you can share your travels around the world.
@@ -23,7 +23,7 @@ If the user logs, he can comment/likes posts, publish/edit/delete posts. The use
 - Contact page working
 
 ### Authors
-[Myriam K. ](https://github.com/Myriiam) - [Thierry B. ](https://github.com/ThierryBilla) - [Yavanna P.](https://github.com/Vanyl)
+Back-end : [Myriam K. ](https://github.com/Myriiam) - Front-end : [Thierry B. ](https://github.com/ThierryBilla) & [Yavanna P.](https://github.com/Vanyl)
 
 ### Licence
 This project is open-sourced software licensed under the [MIT](https://opensource.org/license/MIT).
