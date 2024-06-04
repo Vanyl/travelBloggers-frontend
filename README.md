@@ -1,5 +1,6 @@
 # Travel Bloggers 
 > Take a look at [Travel Bloggers](https://vanyl.github.io/travelBloggers-frontend/)
+> And [here](https://github.com/Myriiam/backend-blog-travel/)'s the back-end
 
 ## About
 Travel Bloggers is a blog application where you can share your travels around the world.
