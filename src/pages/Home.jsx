@@ -1,7 +1,7 @@
 import Hero from '../components/Hero'
 import Continents from '../components/Continents';
 import Posts from '../components/Posts';
-import DailyHighlight from '../components/DailyHighlight'
+// import DailyHighlight from '../components/DailyHighlight'
 import PopularCountries from '../components/PopularCountries'
 import SubFooter from '../components/SubFooter'
 
@@ -11,7 +11,7 @@ const Home = () => {
             <Hero/>
             <Continents/>
             <Posts/>
-            <DailyHighlight/>
+            {/* <DailyHighlight/> */}
             <PopularCountries/>
             <SubFooter/>
         </>

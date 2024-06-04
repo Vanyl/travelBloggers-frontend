@@ -4,18 +4,29 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, useNavigate } from 'react-router-dom';
 import '../sass/navbar.sass';
 
+
 function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const userInput = searchQuery.toLowerCase();
+    const userInputCapitalFirstLetter = userInput.charAt(0).toUpperCase() + userInput.slice(1);
+    navigate(`/country/${userInputCapitalFirstLetter}`);
+  };
+
+
   const handleLogout = async () => {
     try {
       const response = await fetch('https://travel-blogger-46c930280c07.herokuapp.com/api/logout', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}` 
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         }
       });
 
@@ -62,15 +73,19 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
               <Link to="/authentication" className="link" onClick={() => console.log('Login Soon')}>Login</Link>
             </>
           )}
-                    <div className={`search-container ${showSearch ? 'open' : ''}`}>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Search..."
-              style={{ width: showSearch ? '200px' : '0', opacity: showSearch ? '1' : '0' }}
-            />
-            <FaSearch className="link search-icon" onClick={() => setShowSearch(!showSearch)} />
-          </div>
+          <form onSubmit={handleSearch} className="search-form">
+            <div className={`search-container ${showSearch ? 'open' : ''}`}>
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ width: showSearch ? '200px' : '0', opacity: showSearch ? '1' : '0' }}
+              />  
+              <FaSearch className="link search-icon" onClick={() => setShowSearch(!showSearch)} />
+            </div>
+          </form>
         </div>
       </div>
 
