@@ -48,7 +48,7 @@ const Profile = ({ userData, accessToken }) => {
     return <div>Loading...</div>;
   }
 
-  return ( 
+  return (
     <div className="profile-container">
       <div className="profile-info">
         <div className="profile-picture">
@@ -58,17 +58,19 @@ const Profile = ({ userData, accessToken }) => {
             <div>No avatar available</div>
           )}
         </div>
-        <div className="profile-details">
-          <h1>{userData.name}</h1>
-          <p>{userData.description}</p>
-        </div>
-        <div className="settings-button">
-          <Link to={{
+        <div className='profile-settings'>
+          <div className="profile-details">
+            <h1>{userData.name}</h1>
+            <p>{userData.description}</p>
+          </div>
+          <div className="settings-button">
+            <Link to={{
               pathname: "/my-account-settings",
               state: { updatedUserData: userData }
-          }}>
+            }}>
               <FaCog />
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="feed-header">

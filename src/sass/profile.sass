@@ -23,28 +23,35 @@
                 height: 100%
                 object-fit: cover // Utiliser cover pour remplir la div sans déformer l'image
 
-        .profile-details 
-            flex: 1
-            margin-left: 50px
+        .profile-settings
+            display: flex
+            flex-direction: row
+            align-items: baseline
+            margin-left: 0
+        
+        
+            .profile-details 
+                //flex: 1
+                margin-right: 10px
 
-        .settings-button,
-        .settings-button a
-            cursor: pointer
-            display: inline-flex
-            align-items: center
-            justify-content: center
-            background-color: transparent
-            border: none
-            color: #1E2146
-            font-size: 32px
-            transition: color 0.3s ease
-            align-self: flex-start // Alignement au début du conteneur flex
-            position: absolute 
-            top: 13px 
-            left: 120px 
+            .settings-button,
+            .settings-button a
+                cursor: pointer
+                //display: inline-flex
+                //align-items: center
+                //justify-content: center
+                background-color: transparent
+                border: none
+                color: #1E2146
+                font-size: 32px
+                transition: color 0.3s ease
+                //align-self: flex-start // Alignement au début du conteneur flex
+                //position: absolute 
+                //top: 13px 
+                //left: 120px 
 
-            &:hover
-                color: #39db9a
+                &:hover
+                    color: #39db9a
         
     .feed-header 
         margin-top: 20px
